@@ -1,7 +1,7 @@
 ---
 title: "Hugo × GitHub Pages でブログを公開するまでの手順を紹介"
 date: 2020-10-24T05:35:42+09:00
-draft: true
+draft: false
 ---
 
 「自分が行なってきたことをアウトプットする場を作りたい」と前々から考えていましたので、この度 **Hugo** と **GitHub Pages** を使ってブログを公開することにしました。なぜ Hugo かというと[友人](https://peaceiris.com/) が強く勧めてくれたからです。[ここ](https://qiita.com/peaceiris/items/ef38cc2a4b5565d0dd7c) で多くを語ってくれているのでよろしければ一読ください。
