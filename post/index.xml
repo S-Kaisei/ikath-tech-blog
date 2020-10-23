@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ikath Tech Blog</title><link>https://s-kaisei.github.io/ikath-tech-blog/post/</link><description>Recent content in Posts on Ikath Tech Blog</description><generator>Hugo -- gohugo.io</generator><copyright>Copyright © 2019, Weru and the Hugo Authors; all rights reserved.</copyright><lastBuildDate>Sat, 24 Oct 2020 05:43:11 +0900</lastBuildDate><atom:link href="https://s-kaisei.github.io/ikath-tech-blog/post/index.xml" rel="self" type="application/rss+xml"/><item><title>自動走行するラジコンを作成</title><link>https://s-kaisei.github.io/ikath-tech-blog/post/rcar/</link><pubDate>Sat, 24 Oct 2020 05:43:11 +0900</pubDate><guid>https://s-kaisei.github.io/ikath-tech-blog/post/rcar/</guid><description>概要 Raspbeey Pi に学習させたモデルを搭載して、道路の左車線を自動で走行するラジコンカーです。今回は直線のみを対象にし、道路からはみ出さないように設計しました。見た目が戦車ですので、停止時に物体検出を行い自作砲台 (3Dプリンターで作成) を使って輪ゴムを発射するオプションも加えてみました。
+[完成形]
+[全体の流れのイメージ]
+開発環境 Raspberry Pi 3B raspbian 9.4 Jupyter Notebook 4.4.0 Python 3.5.3 TensorFlow 1.11.0 OpenCV 3.4.4 行ったこと ラジコンの製作
+これの組み立て Raspberry Piの環境構築
+OS のインストール SSH の設定や IPアドレスの固定、その他必要なフレームワークのインストールなど 3Dプリンタの使用
+砲台の作成 砲台やモータドライバを固定するための土台の作成 プログラミング(Python)
+サーボモータ、DC モータによるラジコンの制御 CNN による画像の分類 Tiny-YOLOv3 を用いた物体検出 データセットの収集
+前進、右折、左折の3クラスの画像 画像分類モデルの作成</description></item><item><title>Hugo × GitHub Pages でブログを公開するまでの手順を紹介</title><link>https://s-kaisei.github.io/ikath-tech-blog/post/blog-introduce/</link><pubDate>Sat, 24 Oct 2020 05:35:42 +0900</pubDate><guid>https://s-kaisei.github.io/ikath-tech-blog/post/blog-introduce/</guid><description>「自分が行なってきたことをアウトプットする場を作りたい」と前々から考えていましたので、この度 Hugo と GitHub Pages を使ってブログを公開することにしました。なぜ Hugo かというと友人 が強く勧めてくれたからです。ここ で多くを語ってくれているのでよろしければ一読ください。
+​
+Requirement macOS Catalina GitHub Account の所持: https://github.co.jp/ Homebrew: https://brew.sh/index_ja を前提に話を進めていきます。
+​
+Hugo のインストール homebrew を使って hugo をインストールします。
+brew install hugo サイトの作成 &amp;ldquo;your site name&amp;rdquo; は任意です。 生成するとその名前のディレクトリができるので移動します。
+hugo new site &amp;lt;your site name&amp;gt; cd &amp;lt;your site name&amp;gt; ディレクトリ構成は以下のようになってます。
+&amp;lt;your site name&amp;gt; ├── archetypes/ ├── config.toml ├── content/ ├── data/ ├── layouts/ ├── static/ └── themes/ GitHub リポジトリの作成 今後このコンテンツは GitHub にアップロードしていくので、https://github.</description></item></channel></rss>
