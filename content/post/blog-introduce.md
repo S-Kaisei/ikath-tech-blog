@@ -1,5 +1,5 @@
 ---
-title: "Blog Introduce"
+title: "Hugo × GitHub Pages でブログを公開するまでの手順を紹介"
 date: 2020-10-24T05:35:42+09:00
 draft: true
 ---
