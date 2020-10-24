@@ -49,7 +49,7 @@ About を追加したいときは
 hugo new about.md
 ```
 
-
+> 公開する時に draft を false にすることを忘れずに 
 
 
 
