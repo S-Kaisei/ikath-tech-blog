@@ -17,9 +17,9 @@ paginate = 6
     hl_Lines = ""
     lineNoStart = 1
     lineNos = true
-    lineNumbersInTable = false
+    lineNumbersInTable = true
     noClasses = false
-    tabWidth = 2
+    tabWidth = 4
 
 # If you want to use disqus, uncomment the line below
 # disqusShortname = "yourdiscussshortname"
