@@ -43,13 +43,17 @@ Python
 
  &nbsp;&nbsp; Pytorch
 
-Hugo
-
 Github, git
 
 Docker
 
 Linux
+
+Raspberry Pi 3
+
+Arduino
+
+NVIDIA JETSON AGX XAVIER DEVELOPER KIT
 
 ​     
 
