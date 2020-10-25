@@ -13,16 +13,16 @@ paginate = 6
     xhtml = false
   [markup.highlight]
     codeFences = true
-    guessSyntax = true
+    guessSyntax = false
     hl_Lines = ""
     lineNoStart = 1
     lineNos = true
-    lineNumbersInTable = true
+    lineNumbersInTable = false
     noClasses = false
     tabWidth = 4
 
 # If you want to use disqus, uncomment the line below
-disqusShortname = "https-s-kaisei-github-io-ikath-tech-blog"
+# disqusShortname = "https-s-kaisei-github-io-ikath-tech-blog"
 
 # ids used below are not valid. Replace with valid ones
 [params]
