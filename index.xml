@@ -1,4 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ikath Tech Blog</title><link>https://s-kaisei.github.io/Ikath-Tech-Blog/</link><description>Recent content on Ikath Tech Blog</description><generator>Hugo -- gohugo.io</generator><copyright>Copyright © 2019, Weru and the Hugo Authors; all rights reserved.</copyright><lastBuildDate>Sat, 24 Oct 2020 08:08:16 +0900</lastBuildDate><atom:link href="https://s-kaisei.github.io/Ikath-Tech-Blog/index.xml" rel="self" type="application/rss+xml"/><item><title>AboutMe</title><link>https://s-kaisei.github.io/Ikath-Tech-Blog/about/</link><pubDate>Sat, 24 Oct 2020 10:42:18 +0900</pubDate><guid>https://s-kaisei.github.io/Ikath-Tech-Blog/about/</guid><description>This is about page</description></item><item><title>記事を書くために Newsroom についてもう少し詳しく学ぶ</title><link>https://s-kaisei.github.io/Ikath-Tech-Blog/post/more-newsroom/</link><pubDate>Sat, 24 Oct 2020 08:08:16 +0900</pubDate><guid>https://s-kaisei.github.io/Ikath-Tech-Blog/post/more-newsroom/</guid><description>Requirement Hugo × GitHub Pages でブログを公開するまでの手順を紹介 を終えている ​
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ikath Tech Blog</title><link>https://s-kaisei.github.io/Ikath-Tech-Blog/</link><description>Recent content on Ikath Tech Blog</description><generator>Hugo -- gohugo.io</generator><copyright>Copyright © 2019, Weru and the Hugo Authors; all rights reserved.</copyright><lastBuildDate>Sat, 24 Oct 2020 08:08:16 +0900</lastBuildDate><atom:link href="https://s-kaisei.github.io/Ikath-Tech-Blog/index.xml" rel="self" type="application/rss+xml"/><item><title>About Me</title><link>https://s-kaisei.github.io/Ikath-Tech-Blog/about/</link><pubDate>Sat, 24 Oct 2020 10:42:18 +0900</pubDate><guid>https://s-kaisei.github.io/Ikath-Tech-Blog/about/</guid><description>Information Name: Kaisei Shimura
+Nickname: Ikath
+University: the University of Aizu
+Age: 23
+Hometown: Yamanashi
+​
+Carrer, Internship, Hackson Freelance Engineer for six-mouth (OCR)
+Teaching Assistant of Logic Circuit Design
+ALPINE Internship Program for two weeks
+Dalian Internship Program for two weeks
+Github Actions Hackson hosted by DEV
+Health Promotion Idiason
+​
+Skills Python
+ Tensorflow2.x
+ Pytorch
+Hugo
+Github, git
+Docker
+Linux
+​
+Interest Artifical Intelligence
+ Object Detection</description></item><item><title>記事を書くために Newsroom についてもう少し詳しく学ぶ</title><link>https://s-kaisei.github.io/Ikath-Tech-Blog/post/more-newsroom/</link><pubDate>Sat, 24 Oct 2020 08:08:16 +0900</pubDate><guid>https://s-kaisei.github.io/Ikath-Tech-Blog/post/more-newsroom/</guid><description>Requirement Hugo × GitHub Pages でブログを公開するまでの手順を紹介 を終えている ​
 画像・動画を表示する 画像は static/images に保存します。lightMode と darkMode で画像を切り替えることができます。特に気にしないのであれば同じでいいと思います。動画は youtube を公開できます。※ コードを書くと実際に画像や動画が表示されてしまうので便宜上スクリーンショットを利用させていただいてます。
 コードブロックに数字をつける config.toml の 16行目を true に変更
 1guessSyntax = true フッターにメニューを追加 data/ に menu.yml を追加する。
