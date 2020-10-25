@@ -1,5 +1,5 @@
 ---
-title: "記事を書くために Newsroom についてもう少し詳しく学ぶ"
+title: "サイトをカスタマイズするためのノウハウ"
 date: 2020-10-24T08:08:16+09:00
 draft: false
 ---
@@ -22,12 +22,25 @@ draft: false
 
 
 
-## コードブロックに数字をつける
+## コードブロックに番号をつける
 
-config.toml の 16行目を true に変更
+config.toml の 16行目と19行目を true に変更
 
 ```
 guessSyntax = true 
+lineNos = true
+```
+
+なお、番号とコードを分割して表示したい場合は、20行目を true にします。
+
+```
+lineNumbersInTable = true
+```
+
+また、上記の設定をした場合 22行目を 4 に設定した方がコードが見やすくなります。
+
+```
+tabWidth = 4
 ```
 
 
