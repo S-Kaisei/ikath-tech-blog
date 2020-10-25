@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Ikath Tech Blog</title><link>https://s-kaisei.github.io/Ikath-Tech-Blog/post/</link><description>Recent content in Posts on Ikath Tech Blog</description><generator>Hugo -- gohugo.io</generator><copyright>Copyright © 2019, Weru and the Hugo Authors; all rights reserved.</copyright><lastBuildDate>Sat, 24 Oct 2020 08:08:16 +0900</lastBuildDate><atom:link href="https://s-kaisei.github.io/Ikath-Tech-Blog/post/index.xml" rel="self" type="application/rss+xml"/><item><title>サイトをカスタマイズするためのノウハウ</title><link>https://s-kaisei.github.io/Ikath-Tech-Blog/post/more-newsroom/</link><pubDate>Sat, 24 Oct 2020 08:08:16 +0900</pubDate><guid>https://s-kaisei.github.io/Ikath-Tech-Blog/post/more-newsroom/</guid><description>Requirement Hugo × GitHub Pages でブログを公開するまでの手順を紹介 を終えている ​
 画像・動画を表示する 画像は static/images に保存します。lightMode と darkMode で画像を切り替えることができます。特に気にしないのであれば同じでいいと思います。動画は youtube を公開できます。※ コードを書くと実際に画像や動画が表示されてしまうので便宜上スクリーンショットを利用させていただいてます。
 コードブロックに番号をつける config.toml の 16行目と19行目を true に変更
-1 2 guessSyntax = true lineNos = true なお、番号とコードを分割して表示したい場合は、20行目を true にします。
-1 lineNumbersInTable = true また、上記の設定をした場合 22行目を 4 に設定した方がコードが見やすくなります。
-1 tabWidth = 4 フッターにメニューを追加 data/ に menu.yml を追加する。
-1 2 3 4 - item: About url: about/ - item: Blog url: post/ About を追加したいときは</description></item><item><title>自動走行するラジコンを作成</title><link>https://s-kaisei.github.io/Ikath-Tech-Blog/post/rcar/</link><pubDate>Sat, 24 Oct 2020 05:43:11 +0900</pubDate><guid>https://s-kaisei.github.io/Ikath-Tech-Blog/post/rcar/</guid><description>概要 Raspbeey Pi に学習させたモデルを搭載して、道路の左車線を自動で走行するラジコンカーです。今回は直線のみを対象にし、道路からはみ出さないように設計しました。見た目が戦車ですので、停止時に物体検出を行い自作砲台 (3Dプリンターで作成) を使って輪ゴムを発射するオプションも加えてみました。
+guessSyntax = true lineNos = true なお、番号とコードを分割して表示したい場合は、20行目を true にします。
+lineNumbersInTable = true また、上記の設定をした場合 22行目を 4 に設定した方がコードが見やすくなります。
+tabWidth = 4 フッターにメニューを追加 data/ に menu.yml を追加する。
+- item: About url: about/ - item: Blog url: post/ About を追加したいときは
+hugo new about.md 公開する時に draft を false にすることを忘れずに</description></item><item><title>自動走行するラジコンを作成</title><link>https://s-kaisei.github.io/Ikath-Tech-Blog/post/rcar/</link><pubDate>Sat, 24 Oct 2020 05:43:11 +0900</pubDate><guid>https://s-kaisei.github.io/Ikath-Tech-Blog/post/rcar/</guid><description>概要 Raspbeey Pi に学習させたモデルを搭載して、道路の左車線を自動で走行するラジコンカーです。今回は直線のみを対象にし、道路からはみ出さないように設計しました。見た目が戦車ですので、停止時に物体検出を行い自作砲台 (3Dプリンターで作成) を使って輪ゴムを発射するオプションも加えてみました。
 [完成形]
 [全体の流れのイメージ]
 開発環境 Raspberry Pi 3B raspbian 9.4 Jupyter Notebook 4.4.0 Python 3.5.3 TensorFlow 1.11.0 OpenCV 3.4.4 行ったこと ラジコンの製作
@@ -17,6 +18,6 @@ OS のインストール SSH の設定や IPアドレスの固定、その他必
 Requirement macOS Catalina GitHub Account の所持: https://github.co.jp/ Homebrew: https://brew.sh/index_ja を前提に話を進めていきます。
 ​
 Hugo のインストール homebrew を使って hugo をインストールします。
-1 brew install hugo サイトの作成 &amp;ldquo;your site name&amp;rdquo; は任意です。 生成するとその名前のディレクトリができるので移動します。
-1 2 hugo new site &amp;lt;your site name&amp;gt; cd &amp;lt;your site name&amp;gt; ディレクトリ構成は以下のようになってます。
-1 2 3 4 5 6 7 8 &amp;lt;your site name&amp;gt; ├── archetypes/ ├── config.</description></item></channel></rss>
+brew install hugo サイトの作成 &amp;ldquo;your site name&amp;rdquo; は任意です。 生成するとその名前のディレクトリができるので移動します。
+hugo new site &amp;lt;your site name&amp;gt; cd &amp;lt;your site name&amp;gt; ディレクトリ構成は以下のようになってます。
+&amp;lt;your site name&amp;gt; ├── archetypes/ ├── config.toml ├── content/ ├── data/ ├── layouts/ ├── static/ └── themes/ GitHub リポジトリの作成 今後このコンテンツは GitHub にアップロードしていくので、https://github.</description></item></channel></rss>

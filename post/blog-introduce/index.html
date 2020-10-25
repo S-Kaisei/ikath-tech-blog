@@ -1,22 +1,11 @@
 <!doctype html><html lang=en><head><title>Hugo × git hub pages でブログを公開するまでの手順を紹介 | Ikath Tech Blog</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=keywords content="Ikath Tech Blog"><meta property="og:locale" content="en_US"><meta property="og:type" content="article"><meta property="og:title" content="Hugo × GitHub Pages でブログを公開するまでの手順を紹介"><meta property="og:description" content="「自分が行なってきたことをアウトプットする場を作りたい」と前々から考えていましたので、この度 Hugo と GitHub Pages を使ってブログを公開することにしました。なぜ Hugo かというと友人 が強く勧めてくれたからです。ここ で多くを語ってくれているのでよろしければ一読ください。
 ​ …"><meta property="og:url" content="https://s-kaisei.github.io/Ikath-Tech-Blog/post/blog-introduce/"><meta property="og:image" content="images/%!s()"><link rel=apple-touch-icon sizes=180x180 href=https://s-kaisei.github.io/Ikath-Tech-Blog/images/icons/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=https://s-kaisei.github.io/Ikath-Tech-Blog/images/icons/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=https://s-kaisei.github.io/Ikath-Tech-Blog/images/icons/favicon-16x16.png><link rel=manifest href=https://s-kaisei.github.io/Ikath-Tech-Blog/images/icons/site.webmanifest><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><link rel=canonical href=https://s-kaisei.github.io/Ikath-Tech-Blog/post/blog-introduce/><link rel=stylesheet href=https://s-kaisei.github.io/Ikath-Tech-Blog/css/styles.86c6da248e485cdc7f340baeb04c29cf0499e12a33a387104028f046c1d4ba15aa3ef8a4bf8f44a2fba7f0263053fa54dc4d2f2baa3d6c8ebb3c69f7bdbded2b.css integrity="sha512-hsbaJI5IXNx/NAuusEwpzwSZ4Sozo4cQQCjwRsHUuhWqPvikv49Eovun8CYwU/pU3E0vK6o9bI67PGn3vb3tKw=="></head><body><div class=nav-drop><div class=nav-body><a href=https://s-kaisei.github.io/Ikath-Tech-Blog/about/ class=nav_item>AboutMe</a>
 <a href=https://s-kaisei.github.io/Ikath-Tech-Blog/post/ class=nav_item>Blog</a><div class=nav-close></div><div class=color_mode><label for=mode>Toggle Dark Mode</label>
-<input type=checkbox class=color_choice id=mode></div></div></div><header class=nav><nav class=nav-menu><a href=https://s-kaisei.github.io/Ikath-Tech-Blog/ class="nav-brand nav_item">Ikath Tech Blog</a><div class=nav_bar-wrap><div class=nav_bar></div></div></nav></header><main><div class="wrap mt post"><div><p class=post_date>24. October 2020</p><h1 class=post_title>Hugo × GitHub Pages でブログを公開するまでの手順を紹介</h1><div class=post_body><div class=post_inner><p>「自分が行なってきたことをアウトプットする場を作りたい」と前々から考えていましたので、この度 <strong>Hugo</strong> と <strong>GitHub Pages</strong> を使ってブログを公開することにしました。なぜ Hugo かというと<a href=https://peaceiris.com/>友人</a> が強く勧めてくれたからです。<a href=https://qiita.com/peaceiris/items/ef38cc2a4b5565d0dd7c>ここ</a> で多くを語ってくれているのでよろしければ一読ください。</p><p>​</p><h2 id=requirement>Requirement</h2><ul><li>macOS Catalina</li><li>GitHub Account の所持: <a href=https://github.co.jp/>https://github.co.jp/</a></li><li>Homebrew: <a href=https://brew.sh/index_ja>https://brew.sh/index_ja</a></li></ul><p>を前提に話を進めていきます。</p><p>​</p><h2 id=hugo-のインストール>Hugo のインストール</h2><p>homebrew を使って hugo をインストールします。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>brew install hugo
-</code></pre></td></tr></table></div></div><h2 id=サイトの作成>サイトの作成</h2><p>&ldquo;your site name&rdquo; は任意です。
-生成するとその名前のディレクトリができるので移動します。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>hugo new site &lt;your site name&gt;
+<input type=checkbox class=color_choice id=mode></div></div></div><header class=nav><nav class=nav-menu><a href=https://s-kaisei.github.io/Ikath-Tech-Blog/ class="nav-brand nav_item">Ikath Tech Blog</a><div class=nav_bar-wrap><div class=nav_bar></div></div></nav></header><main><div class="wrap mt post"><div><p class=post_date>24. October 2020</p><h1 class=post_title>Hugo × GitHub Pages でブログを公開するまでの手順を紹介</h1><div class=post_body><div class=post_inner><p>「自分が行なってきたことをアウトプットする場を作りたい」と前々から考えていましたので、この度 <strong>Hugo</strong> と <strong>GitHub Pages</strong> を使ってブログを公開することにしました。なぜ Hugo かというと<a href=https://peaceiris.com/>友人</a> が強く勧めてくれたからです。<a href=https://qiita.com/peaceiris/items/ef38cc2a4b5565d0dd7c>ここ</a> で多くを語ってくれているのでよろしければ一読ください。</p><p>​</p><h2 id=requirement>Requirement</h2><ul><li>macOS Catalina</li><li>GitHub Account の所持: <a href=https://github.co.jp/>https://github.co.jp/</a></li><li>Homebrew: <a href=https://brew.sh/index_ja>https://brew.sh/index_ja</a></li></ul><p>を前提に話を進めていきます。</p><p>​</p><h2 id=hugo-のインストール>Hugo のインストール</h2><p>homebrew を使って hugo をインストールします。</p><pre><code>brew install hugo
+</code></pre><h2 id=サイトの作成>サイトの作成</h2><p>&ldquo;your site name&rdquo; は任意です。
+生成するとその名前のディレクトリができるので移動します。</p><pre><code>hugo new site &lt;your site name&gt;
 cd &lt;your site name&gt;
-</code></pre></td></tr></table></div></div><p>ディレクトリ構成は以下のようになってます。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span><span class=lnt>8
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>&lt;your site name&gt;
+</code></pre><p>ディレクトリ構成は以下のようになってます。</p><pre><code>&lt;your site name&gt;
 ├── archetypes/
 ├── config.toml
 ├── content/
@@ -24,182 +13,95 @@ cd &lt;your site name&gt;
 ├── layouts/
 ├── static/
 └── themes/
-</code></pre></td></tr></table></div></div><h2 id=github-リポジトリの作成>GitHub リポジトリの作成</h2><p>今後このコンテンツは GitHub にアップロードしていくので、<a href=https://github.com/>https://github.com/</a> であらかじめリポジトリを作成しておきます。
+</code></pre><h2 id=github-リポジトリの作成>GitHub リポジトリの作成</h2><p>今後このコンテンツは GitHub にアップロードしていくので、<a href=https://github.com/>https://github.com/</a> であらかじめリポジトリを作成しておきます。
 Repository name を site name と同じに設定した方が分かりやすいと思います。
 このとき README や .gitignore の追加はスキップします。</p><picture class=nav_logo>
-<source srcset=https://s-kaisei.github.io/Ikath-Tech-Blog/images/create_repo.jpg media="(prefers-color-scheme: dark)"><img srcset=https://s-kaisei.github.io/Ikath-Tech-Blog/images/create_repo.jpg alt="create repository"></picture><p>リポジトリ作成が終わったら terminal に戻り、README.md を追加して git の初期化を行います。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>echo &#34;# &lt;your site name&gt;&#34; &gt;&gt; README.md
+<source srcset=https://s-kaisei.github.io/Ikath-Tech-Blog/images/create_repo.jpg media="(prefers-color-scheme: dark)"><img srcset=https://s-kaisei.github.io/Ikath-Tech-Blog/images/create_repo.jpg alt="create repository"></picture><p>リポジトリ作成が終わったら terminal に戻り、README.md を追加して git の初期化を行います。</p><pre><code>echo &quot;# &lt;your site name&gt;&quot; &gt;&gt; README.md
 git init
-</code></pre></td></tr></table></div></div><h2 id=hugo-テーマの追加>Hugo テーマの追加</h2><p>テーマは <a href=https://themes.gohugo.io/>https://themes.gohugo.io/</a> から選ぶことができます。本サイトは、<a href=https://github.com/onweru/newsroom>newsroom</a> を利用させていただいていますので newsroom を例に説明していきます。テーマごとに設定が少し異なりますので違うテーマを選んだ方はそちらを参考にしてください。</p><p>themes/ にテーマを追加して、 config.toml にテンプレートをコピーします。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>git submodule add https://github.com/onweru/newsroom.git themes/newsroom
-</code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span><span class=lnt>30
-</span><span class=lnt>31
-</span><span class=lnt>32
-</span><span class=lnt>33
-</span><span class=lnt>34
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-toml data-lang=toml><span class=nx>baseurl</span> <span class=p>=</span> <span class=s2>&#34;https://example.com/&#34;</span>  <span class=c># Include trailing slash</span>
-<span class=nx>title</span> <span class=p>=</span> <span class=s2>&#34;Newsroom&#34;</span>
-<span class=nx>theme</span> <span class=p>=</span> <span class=s2>&#34;newsroom&#34;</span>
-<span class=nx>author</span> <span class=p>=</span> <span class=s2>&#34;Weru&#34;</span>
-<span class=nx>copyright</span> <span class=p>=</span> <span class=s2>&#34;Copyright © 2019, Weru and the Hugo Authors; all rights reserved.&#34;</span>
-<span class=nx>canonifyurls</span> <span class=p>=</span> <span class=kc>true</span>
-<span class=nx>paginate</span> <span class=p>=</span> <span class=mi>6</span>
-
-<span class=p>[</span><span class=nx>markup</span><span class=p>]</span>
-  <span class=p>[</span><span class=nx>markup</span><span class=p>.</span><span class=nx>goldmark</span><span class=p>.</span><span class=nx>renderer</span><span class=p>]</span>
-    <span class=nx>hardWraps</span> <span class=p>=</span> <span class=kc>false</span>
-    <span class=nx>unsafe</span> <span class=p>=</span> <span class=kc>false</span> <span class=c># change to true to enable inclusion of rawHTML and math functions</span>
-    <span class=nx>xhtml</span> <span class=p>=</span> <span class=kc>false</span>
-  <span class=p>[</span><span class=nx>markup</span><span class=p>.</span><span class=nx>highlight</span><span class=p>]</span>
-    <span class=nx>codeFences</span> <span class=p>=</span> <span class=kc>true</span>
-    <span class=nx>guessSyntax</span> <span class=p>=</span> <span class=kc>false</span>
-    <span class=nx>hl_Lines</span> <span class=p>=</span> <span class=s2>&#34;&#34;</span>
-    <span class=nx>lineNoStart</span> <span class=p>=</span> <span class=mi>1</span>
-    <span class=nx>lineNos</span> <span class=p>=</span> <span class=kc>true</span>
-    <span class=nx>lineNumbersInTable</span> <span class=p>=</span> <span class=kc>false</span>
-    <span class=nx>noClasses</span> <span class=p>=</span> <span class=kc>false</span>
-    <span class=nx>tabWidth</span> <span class=p>=</span> <span class=mi>2</span>
-
-<span class=c># If you want to use disqus, uncomment the line below</span>
-<span class=c># disqusShortname = &#34;yourdiscussshortname&#34;</span>
-
-<span class=c># ids used below are not valid. Replace with valid ones</span>
-<span class=p>[</span><span class=nx>params</span><span class=p>]</span>
-  <span class=c># ga_analytics = &#34;&#34; # google analytics ID e.g UA-116386578-1</span>
-  <span class=c># ga_verify = &#34;&#34; # google verification code e.g 5jb-rxeBfITeJQKOuUss3ud6FPGTxXkCho-ZN5qlrZg</span>
-  <span class=c># twitter = &#34;&#34; # twitter handle e.g @weru</span>
-  <span class=c># mainSections = [&#34;blog&#34;, &#34;docs&#34;] see https://gohugo.io/functions/where/#mainsections</span>
-  <span class=c># uncomment the line below will disable darkmode by default.</span>
-  <span class=c># disableDarkMode = true  # note that the UI control for toggling darkmode will remain in place. This way, the user can decide which mode they would like to use while browsing your website</span>
-</code></pre></td></tr></table></div></div><p>ここで baseurl と theme を変更します。　</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-toml data-lang=toml><span class=nx>baseurl</span> <span class=p>=</span> <span class=s2>&#34;https://&lt;your-github-id&gt;.github.io/&lt;your-site-name&gt;/&#34;</span>
-<span class=nx>theme</span> <span class=p>=</span> <span class=s2>&#34;&lt;your-theme-name&gt;&#34;</span>
-
-<span class=nx>例</span>
-<span class=nx>baseurl</span> <span class=p>=</span> <span class=s2>&#34;https://s-kaisei.github.io/ikath-tech-blog/&#34;</span>
-<span class=nx>theme</span> <span class=p>=</span> <span class=s2>&#34;Ikath Tech Blog&#34;</span>
-</code></pre></td></tr></table></div></div><h2 id=記事の作成>記事の作成</h2><p>記事を作成する際には次のコマンドを実行します。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>hugo new post/&lt;filename&gt;.md
-</code></pre></td></tr></table></div></div><p>ファイルは以下のようなフォーマットで content/posts/ に生成されます。ここに markdown 記法で記事を書いてくって感じです。draft は記事を作成途中で公開したくない時に true にします。公開する時には false にしましょう。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-markdown data-lang=markdown>--- 
-title: &#34;<span class=p>&lt;</span><span class=nt>filename</span><span class=p>&gt;</span>&#34; 
-date: 2019-03-26T08:47:11+01:00 
-draft: true 
----
-<span class=gu>## ここから記事を書いていく
-</span></code></pre></td></tr></table></div></div><p>サイトは hugo server を起動した後に <a href=http://localhost:1313/>http://localhost:1313/</a> にアクセスすることで確認できます。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>hugo server -D
-</code></pre></td></tr></table></div></div><h2 id=actions-gh-pages>Actions-gh-pages</h2><p>gh-pages という GitHub Actions を使用してデプロイを自動で行います。これを使えば、GitHub にプッシュしただけでサイトが構築されます。方法は簡単で以下のファイルを .github/workflows/gh-pages.yml に追加するだけです。この Action について詳しい内容を知りたい方は<a href=https://github.com/peaceiris/actions-gh-pages>こちら</a>をどうぞ。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-yml data-lang=yml><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>github pages</span><span class=w>
-</span><span class=w>
-</span><span class=w></span><span class=nt>on</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span>- <span class=l>master</span><span class=w>
-</span><span class=w>
-</span><span class=w></span><span class=nt>jobs</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>deploy</span><span class=p>:</span><span class=w>
-</span><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-18.04</span><span class=w>
-</span><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span>- <span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v2</span><span class=w>
-</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
-</span><span class=w>          </span><span class=nt>submodules</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>  </span><span class=c># Fetch Hugo themes</span><span class=w>
-</span><span class=w>          </span><span class=nt>fetch-depth</span><span class=p>:</span><span class=w> </span><span class=m>0</span><span class=w>    </span><span class=c># Fetch all history for .GitInfo and .Lastmod</span><span class=w>
-</span><span class=w>
-</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Setup Hugo</span><span class=w>
-</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-hugo@v2</span><span class=w>
-</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
-</span><span class=w>          </span><span class=nt>hugo-version</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;0.76.5&#39;</span><span class=w>
-</span><span class=w>
-</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build</span><span class=w>
-</span><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>hugo --minify</span><span class=w>
-</span><span class=w>
-</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy</span><span class=w>
-</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-gh-pages@v3</span><span class=w>
-</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
-</span><span class=w>          </span><span class=nt>github_token</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.GITHUB_TOKEN }}</span><span class=w>
-</span><span class=w>          </span><span class=nt>publish_dir</span><span class=p>:</span><span class=w> </span><span class=l>./public</span><span class=w>
-</span></code></pre></td></tr></table></div></div><p>ここまで来たら、一度コミットしてプッシュします。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>git commit -m &#34;first article&#34;
+</code></pre><h2 id=hugo-テーマの追加>Hugo テーマの追加</h2><p>テーマは <a href=https://themes.gohugo.io/>https://themes.gohugo.io/</a> から選ぶことができます。本サイトは、<a href=https://github.com/onweru/newsroom>newsroom</a> を利用させていただいていますので newsroom を例に説明していきます。テーマごとに設定が少し異なりますので違うテーマを選んだ方はそちらを参考にしてください。</p><p>themes/ にテーマを追加して、 config.toml にテンプレートをコピーします。</p><pre><code>git submodule add https://github.com/onweru/newsroom.git themes/newsroom
+</code></pre><div class=highlight><pre class=chroma><code class=language-toml data-lang=toml><span class=ln> 1</span><span class=nx>baseurl</span> <span class=p>=</span> <span class=s2>&#34;https://example.com/&#34;</span>  <span class=c># Include trailing slash</span>
+<span class=ln> 2</span><span class=nx>title</span> <span class=p>=</span> <span class=s2>&#34;Newsroom&#34;</span>
+<span class=ln> 3</span><span class=nx>theme</span> <span class=p>=</span> <span class=s2>&#34;newsroom&#34;</span>
+<span class=ln> 4</span><span class=nx>author</span> <span class=p>=</span> <span class=s2>&#34;Weru&#34;</span>
+<span class=ln> 5</span><span class=nx>copyright</span> <span class=p>=</span> <span class=s2>&#34;Copyright © 2019, Weru and the Hugo Authors; all rights reserved.&#34;</span>
+<span class=ln> 6</span><span class=nx>canonifyurls</span> <span class=p>=</span> <span class=kc>true</span>
+<span class=ln> 7</span><span class=nx>paginate</span> <span class=p>=</span> <span class=mi>6</span>
+<span class=ln> 8</span>
+<span class=ln> 9</span><span class=p>[</span><span class=nx>markup</span><span class=p>]</span>
+<span class=ln>10</span>  <span class=p>[</span><span class=nx>markup</span><span class=p>.</span><span class=nx>goldmark</span><span class=p>.</span><span class=nx>renderer</span><span class=p>]</span>
+<span class=ln>11</span>    <span class=nx>hardWraps</span> <span class=p>=</span> <span class=kc>false</span>
+<span class=ln>12</span>    <span class=nx>unsafe</span> <span class=p>=</span> <span class=kc>false</span> <span class=c># change to true to enable inclusion of rawHTML and math functions</span>
+<span class=ln>13</span>    <span class=nx>xhtml</span> <span class=p>=</span> <span class=kc>false</span>
+<span class=ln>14</span>  <span class=p>[</span><span class=nx>markup</span><span class=p>.</span><span class=nx>highlight</span><span class=p>]</span>
+<span class=ln>15</span>    <span class=nx>codeFences</span> <span class=p>=</span> <span class=kc>true</span>
+<span class=ln>16</span>    <span class=nx>guessSyntax</span> <span class=p>=</span> <span class=kc>false</span>
+<span class=ln>17</span>    <span class=nx>hl_Lines</span> <span class=p>=</span> <span class=s2>&#34;&#34;</span>
+<span class=ln>18</span>    <span class=nx>lineNoStart</span> <span class=p>=</span> <span class=mi>1</span>
+<span class=ln>19</span>    <span class=nx>lineNos</span> <span class=p>=</span> <span class=kc>true</span>
+<span class=ln>20</span>    <span class=nx>lineNumbersInTable</span> <span class=p>=</span> <span class=kc>false</span>
+<span class=ln>21</span>    <span class=nx>noClasses</span> <span class=p>=</span> <span class=kc>false</span>
+<span class=ln>22</span>    <span class=nx>tabWidth</span> <span class=p>=</span> <span class=mi>2</span>
+<span class=ln>23</span>
+<span class=ln>24</span><span class=c># If you want to use disqus, uncomment the line below</span>
+<span class=ln>25</span><span class=c># disqusShortname = &#34;yourdiscussshortname&#34;</span>
+<span class=ln>26</span>
+<span class=ln>27</span><span class=c># ids used below are not valid. Replace with valid ones</span>
+<span class=ln>28</span><span class=p>[</span><span class=nx>params</span><span class=p>]</span>
+<span class=ln>29</span>  <span class=c># ga_analytics = &#34;&#34; # google analytics ID e.g UA-116386578-1</span>
+<span class=ln>30</span>  <span class=c># ga_verify = &#34;&#34; # google verification code e.g 5jb-rxeBfITeJQKOuUss3ud6FPGTxXkCho-ZN5qlrZg</span>
+<span class=ln>31</span>  <span class=c># twitter = &#34;&#34; # twitter handle e.g @weru</span>
+<span class=ln>32</span>  <span class=c># mainSections = [&#34;blog&#34;, &#34;docs&#34;] see https://gohugo.io/functions/where/#mainsections</span>
+<span class=ln>33</span>  <span class=c># uncomment the line below will disable darkmode by default.</span>
+<span class=ln>34</span>  <span class=c># disableDarkMode = true  # note that the UI control for toggling darkmode will remain in place. This way, the user can decide which mode they would like to use while browsing your website</span>
+</code></pre></div><p>ここで baseurl と theme を変更します。　</p><div class=highlight><pre class=chroma><code class=language-toml data-lang=toml><span class=ln>1</span><span class=nx>baseurl</span> <span class=p>=</span> <span class=s2>&#34;https://&lt;your-github-id&gt;.github.io/&lt;your-site-name&gt;/&#34;</span>
+<span class=ln>2</span><span class=nx>theme</span> <span class=p>=</span> <span class=s2>&#34;&lt;your-theme-name&gt;&#34;</span>
+<span class=ln>3</span>
+<span class=ln>4</span><span class=nx>例</span>
+<span class=ln>5</span><span class=nx>baseurl</span> <span class=p>=</span> <span class=s2>&#34;https://s-kaisei.github.io/ikath-tech-blog/&#34;</span>
+<span class=ln>6</span><span class=nx>theme</span> <span class=p>=</span> <span class=s2>&#34;Ikath Tech Blog&#34;</span>
+</code></pre></div><h2 id=記事の作成>記事の作成</h2><p>記事を作成する際には次のコマンドを実行します。</p><pre><code>hugo new post/&lt;filename&gt;.md
+</code></pre><p>ファイルは以下のようなフォーマットで content/posts/ に生成されます。ここに markdown 記法で記事を書いてくって感じです。draft は記事を作成途中で公開したくない時に true にします。公開する時には false にしましょう。</p><div class=highlight><pre class=chroma><code class=language-markdown data-lang=markdown><span class=ln>1</span>--- 
+<span class=ln>2</span>title: &#34;<span class=p>&lt;</span><span class=nt>filename</span><span class=p>&gt;</span>&#34; 
+<span class=ln>3</span>date: 2019-03-26T08:47:11+01:00 
+<span class=ln>4</span>draft: true 
+<span class=ln>5</span>---
+<span class=ln>6</span><span class=gu>## ここから記事を書いていく
+</span></code></pre></div><p>サイトは hugo server を起動した後に <a href=http://localhost:1313/>http://localhost:1313/</a> にアクセスすることで確認できます。</p><pre><code>hugo server -D
+</code></pre><h2 id=actions-gh-pages>Actions-gh-pages</h2><p>gh-pages という GitHub Actions を使用してデプロイを自動で行います。これを使えば、GitHub にプッシュしただけでサイトが構築されます。方法は簡単で以下のファイルを .github/workflows/gh-pages.yml に追加するだけです。この Action について詳しい内容を知りたい方は<a href=https://github.com/peaceiris/actions-gh-pages>こちら</a>をどうぞ。</p><div class=highlight><pre class=chroma><code class=language-yml data-lang=yml><span class=ln> 1</span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>github pages</span><span class=w>
+</span><span class=ln> 2</span><span class=w>
+</span><span class=ln> 3</span><span class=w></span><span class=nt>on</span><span class=p>:</span><span class=w>
+</span><span class=ln> 4</span><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
+</span><span class=ln> 5</span><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w>
+</span><span class=ln> 6</span><span class=w>      </span>- <span class=l>master</span><span class=w>
+</span><span class=ln> 7</span><span class=w>
+</span><span class=ln> 8</span><span class=w></span><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span><span class=ln> 9</span><span class=w>  </span><span class=nt>deploy</span><span class=p>:</span><span class=w>
+</span><span class=ln>10</span><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-18.04</span><span class=w>
+</span><span class=ln>11</span><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span><span class=ln>12</span><span class=w>      </span>- <span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v2</span><span class=w>
+</span><span class=ln>13</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=ln>14</span><span class=w>          </span><span class=nt>submodules</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>  </span><span class=c># Fetch Hugo themes</span><span class=w>
+</span><span class=ln>15</span><span class=w>          </span><span class=nt>fetch-depth</span><span class=p>:</span><span class=w> </span><span class=m>0</span><span class=w>    </span><span class=c># Fetch all history for .GitInfo and .Lastmod</span><span class=w>
+</span><span class=ln>16</span><span class=w>
+</span><span class=ln>17</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Setup Hugo</span><span class=w>
+</span><span class=ln>18</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-hugo@v2</span><span class=w>
+</span><span class=ln>19</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=ln>20</span><span class=w>          </span><span class=nt>hugo-version</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;0.76.5&#39;</span><span class=w>
+</span><span class=ln>21</span><span class=w>
+</span><span class=ln>22</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build</span><span class=w>
+</span><span class=ln>23</span><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>hugo --minify</span><span class=w>
+</span><span class=ln>24</span><span class=w>
+</span><span class=ln>25</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy</span><span class=w>
+</span><span class=ln>26</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-gh-pages@v3</span><span class=w>
+</span><span class=ln>27</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=ln>28</span><span class=w>          </span><span class=nt>github_token</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.GITHUB_TOKEN }}</span><span class=w>
+</span><span class=ln>29</span><span class=w>          </span><span class=nt>publish_dir</span><span class=p>:</span><span class=w> </span><span class=l>./public</span><span class=w>
+</span></code></pre></div><p>ここまで来たら、一度コミットしてプッシュします。</p><pre><code>git commit -m &quot;first article&quot;
 git remote add origin git@github.com:&lt;your github name&gt;/&lt;your branch name&gt;.git
 git push -u origin master
-</code></pre></td></tr></table></div></div><h2 id=github-pages-の設定>GitHub Pages の設定</h2><p>GitHub Pages の設定を行います。リポジトリから Setting に行き、下の方にスクロールしていくと、下の画像のような GitHub Pages があると思います。Source のところを画像のように Branch: gh-pages from /root にして保存します。</p><picture class=nav_logo>
-<source srcset=https://s-kaisei.github.io/Ikath-Tech-Blog/images/gh_pages.png media="(prefers-color-scheme: dark)"><img srcset=https://s-kaisei.github.io/Ikath-Tech-Blog/images/gh_pages.jpg alt="gh-pages setting"></picture><p>ここまでの設定を一通り終えたらサイトが公開されているはずです。</p><p>​</p><h2 id=設定が終わったら>設定が終わったら</h2><p>以降、記事の作成からデプロイまでの流れは次のようになります。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>hugo new posts/&lt;filename&gt;.md
+</code></pre><h2 id=github-pages-の設定>GitHub Pages の設定</h2><p>GitHub Pages の設定を行います。リポジトリから Setting に行き、下の方にスクロールしていくと、下の画像のような GitHub Pages があると思います。Source のところを画像のように Branch: gh-pages from /root にして保存します。</p><picture class=nav_logo>
+<source srcset=https://s-kaisei.github.io/Ikath-Tech-Blog/images/gh_pages.png media="(prefers-color-scheme: dark)"><img srcset=https://s-kaisei.github.io/Ikath-Tech-Blog/images/gh_pages.jpg alt="gh-pages setting"></picture><p>ここまでの設定を一通り終えたらサイトが公開されているはずです。</p><p>​</p><h2 id=設定が終わったら>設定が終わったら</h2><p>以降、記事の作成からデプロイまでの流れは次のようになります。</p><pre><code>hugo new posts/&lt;filename&gt;.md
 git add .
-git commit -m &#39;add filename article&#39;
+git commit -m 'add filename article'
 git push
-</code></pre></td></tr></table></div></div><p>以上で終わりです。お疲れ様でした!!</p></div><div class="post_extra mb-2"><div class=copy data-before="Share Story" data-after="Link Copied"><svg class="icon"><use xlink:href="#copy"/></svg></div></div><div></div></div></div><a href=https://s-kaisei.github.io/Ikath-Tech-Blog/ class=post_nav><span class=post_next>The Latest<svg class="icon icon_scale"><use xlink:href="#double-arrow"/></svg></span></a></div></main><footer class="footer wrap pale"><p>&copy;&nbsp;<span class=year></span>&nbsp;Ikath Tech Blog</p><p class="attribution upcase">Designed by <a href="<no value>" target=_blank title="Linkedin Profile" rel=nonopener><no value></a></p></footer><script src=https://s-kaisei.github.io/Ikath-Tech-Blog/js/index.min.1a678c05b3d77bbd645a832d2c854f0e0728782ee0b9cc73940636c782bb1ec995125d2538c99ba876614f4e649bf837b9f43ff6bbd68a8d48a2a720e2dd3656.js></script><svg width="0" height="0" class="hidden"><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 699.428 699.428" id="copy"><path d="M502.714.0H240.428C194.178.0 153 42.425 153 87.429l-25.267.59c-46.228.0-84.019 41.834-84.019 86.838V612c0 45.004 41.179 87.428 87.429 87.428H459c46.249.0 87.428-42.424 87.428-87.428h21.857c46.25.0 87.429-42.424 87.429-87.428v-349.19L502.714.0zM459 655.715H131.143c-22.95.0-43.714-21.441-43.714-43.715V174.857c0-22.272 18.688-42.993 41.638-42.993l23.933-.721v393.429C153 569.576 194.178 612 240.428 612h262.286c0 22.273-20.765 43.715-43.714 43.715zm153-131.143c0 22.271-20.765 43.713-43.715 43.713H240.428c-22.95.0-43.714-21.441-43.714-43.713V87.429c0-22.272 20.764-43.714 43.714-43.714H459c-.351 50.337.0 87.975.0 87.975.0 45.419 40.872 86.882 87.428 86.882H612v306zm-65.572-349.715c-23.277.0-43.714-42.293-43.714-64.981V44.348L612 174.857h-65.572zm-43.714 131.537H306c-12.065.0-21.857 9.77-21.857 21.835s9.792 21.835 21.857 21.835h196.714c12.065.0 21.857-9.771 21.857-21.835.0-12.065-9.792-21.835-21.857-21.835zm0 109.176H306c-12.065.0-21.857 9.77-21.857 21.834.0 12.066 9.792 21.836 21.857 21.836h196.714c12.065.0 21.857-9.77 21.857-21.836.0-12.064-9.792-21.834-21.857-21.834z"/></symbol><symbol viewBox="0 0 53 42" xmlns="http://www.w3.org/2000/svg" id="double-arrow"><path d="M.595 39.653a1.318 1.318.0 010-1.864L16.55 21.833a1.318 1.318.0 000-1.863L.595 4.014a1.318 1.318.0 010-1.863L2.125.62a1.318 1.318.0 011.864.0l19.35 19.349a1.318 1.318.0 010 1.863l-19.35 19.35a1.318 1.318.0 01-1.863.0zm29 0a1.318 1.318.0 010-1.864L45.55 21.833a1.318 1.318.0 000-1.863L29.595 4.014a1.318 1.318.0 010-1.863l1.53-1.53a1.318 1.318.0 011.864.0l19.35 19.349a1.318 1.318.0 010 1.863l-19.35 19.35a1.318 1.318.0 01-1.863.0z"/></symbol></svg></body></html>
+</code></pre><p>以上で終わりです。お疲れ様でした!!</p></div><div class="post_extra mb-2"><div class=copy data-before="Share Story" data-after="Link Copied"><svg class="icon"><use xlink:href="#copy"/></svg></div></div><div></div></div></div><a href=https://s-kaisei.github.io/Ikath-Tech-Blog/ class=post_nav><span class=post_next>The Latest<svg class="icon icon_scale"><use xlink:href="#double-arrow"/></svg></span></a></div></main><footer class="footer wrap pale"><p>&copy;&nbsp;<span class=year></span>&nbsp;Ikath Tech Blog</p><p class="attribution upcase">Designed by <a href="<no value>" target=_blank title="Linkedin Profile" rel=nonopener><no value></a></p></footer><script src=https://s-kaisei.github.io/Ikath-Tech-Blog/js/index.min.1a678c05b3d77bbd645a832d2c854f0e0728782ee0b9cc73940636c782bb1ec995125d2538c99ba876614f4e649bf837b9f43ff6bbd68a8d48a2a720e2dd3656.js></script><svg width="0" height="0" class="hidden"><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 699.428 699.428" id="copy"><path d="M502.714.0H240.428C194.178.0 153 42.425 153 87.429l-25.267.59c-46.228.0-84.019 41.834-84.019 86.838V612c0 45.004 41.179 87.428 87.429 87.428H459c46.249.0 87.428-42.424 87.428-87.428h21.857c46.25.0 87.429-42.424 87.429-87.428v-349.19L502.714.0zM459 655.715H131.143c-22.95.0-43.714-21.441-43.714-43.715V174.857c0-22.272 18.688-42.993 41.638-42.993l23.933-.721v393.429C153 569.576 194.178 612 240.428 612h262.286c0 22.273-20.765 43.715-43.714 43.715zm153-131.143c0 22.271-20.765 43.713-43.715 43.713H240.428c-22.95.0-43.714-21.441-43.714-43.713V87.429c0-22.272 20.764-43.714 43.714-43.714H459c-.351 50.337.0 87.975.0 87.975.0 45.419 40.872 86.882 87.428 86.882H612v306zm-65.572-349.715c-23.277.0-43.714-42.293-43.714-64.981V44.348L612 174.857h-65.572zm-43.714 131.537H306c-12.065.0-21.857 9.77-21.857 21.835s9.792 21.835 21.857 21.835h196.714c12.065.0 21.857-9.771 21.857-21.835.0-12.065-9.792-21.835-21.857-21.835zm0 109.176H306c-12.065.0-21.857 9.77-21.857 21.834.0 12.066 9.792 21.836 21.857 21.836h196.714c12.065.0 21.857-9.77 21.857-21.836.0-12.064-9.792-21.834-21.857-21.834z"/></symbol><symbol viewBox="0 0 53 42" xmlns="http://www.w3.org/2000/svg" id="double-arrow"><path d="M.595 39.653a1.318 1.318.0 010-1.864L16.55 21.833a1.318 1.318.0 000-1.863L.595 4.014a1.318 1.318.0 010-1.863L2.125.62a1.318 1.318.0 011.864.0l19.35 19.349a1.318 1.318.0 010 1.863l-19.35 19.35a1.318 1.318.0 01-1.863.0zm29 0a1.318 1.318.0 010-1.864L45.55 21.833a1.318 1.318.0 000-1.863L29.595 4.014a1.318 1.318.0 010-1.863l1.53-1.53a1.318 1.318.0 011.864.0l19.35 19.349a1.318 1.318.0 010 1.863l-19.35 19.35a1.318 1.318.0 01-1.863.0z"/></symbol></svg></body></html>
