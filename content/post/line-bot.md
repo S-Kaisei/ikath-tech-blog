@@ -23,7 +23,11 @@ draft: true
 
 > GAS でコーディングをするときは、1つの Google Account のみでログインしていないとだめみたいです。複数アカウントでログインしている場合は一度全てのアカウントをログアウトさせてから対象となるアカウントでログインしましょう。
 
-```
+​      
+
+ソースコード全体を先に記述します。
+
+```js
 var ACCESS_TOKEN = '<your-access-token>';
 var MAIL_ADDRESS = ['<your-email>']
 
@@ -241,4 +245,6 @@ function getImage(messageId) {
 | url        | folder name | フォルダの共有 URL を表示      |
 | remaining  | -           | ドライブの残量を表示           |
 | help       | -           | Help を表示                    |
+
+
 
