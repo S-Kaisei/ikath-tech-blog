@@ -81,7 +81,7 @@ themes/ にテーマを追加して、 config.toml にテンプレートをコ�
 git submodule add https://github.com/onweru/newsroom.git themes/newsroom
 ```
 
-```
+```toml
 baseurl = "https://example.com/"  # Include trailing slash
 title = "Newsroom"
 theme = "newsroom"
@@ -120,7 +120,7 @@ paginate = 6
 
 ここで baseurl と theme を変更します。　
 
-```
+```toml
 baseurl = "https://<your-github-id>.github.io/<your-site-name>/"
 theme = "<your-theme-name>"
 
@@ -141,7 +141,7 @@ hugo new post/<filename>.md
 
 ファイルは以下のようなフォーマットで content/posts/ に生成されます。ここに markdown 記法で記事を書いてくって感じです。draft は記事を作成途中で公開したくない時に true にします。公開する時には false にしましょう。
 
-```
+```markdown
 --- 
 title: "<filename>" 
 date: 2019-03-26T08:47:11+01:00 
@@ -162,7 +162,7 @@ hugo server -D
 
 gh-pages という GitHub Actions を使用してデプロイを自動で行います。これを使えば、GitHub にプッシュしただけでサイトが構築されます。方法は簡単で以下のファイルを .github/workflows/gh-pages.yml に追加するだけです。この Action について詳しい内容を知りたい方は[こちら](https://github.com/peaceiris/actions-gh-pages)をどうぞ。
 
-```
+```yml
 name: github pages
 
 on:
