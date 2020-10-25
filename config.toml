@@ -22,7 +22,7 @@ paginate = 6
     tabWidth = 4
 
 # If you want to use disqus, uncomment the line below
-# disqusShortname = "yourdiscussshortname"
+disqusShortname = "https-s-kaisei-github-io-ikath-tech-blog"
 
 # ids used below are not valid. Replace with valid ones
 [params]
