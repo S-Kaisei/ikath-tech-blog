@@ -1,7 +1,7 @@
 ---
 title: "画像を自動で Google Drive に保存する Line Bot を作成したので紹介"
 date: 2020-10-24T06:29:56+09:00
-draft: true
+draft: false
 ---
 
 友人と連絡を取り合う時によく LINE を使うのですが、送信された画像をその時のイベントごとに自動で保存できたら便利だなと考え、line bot を作ることにしました。また、グループメンバーはみんな情報系出身のためコマンドライン風に実装してみました。
@@ -12,7 +12,7 @@ draft: true
 
 ## Requirement
 
-- Line Developer の登録
+- Line Developer の登録と使いかた
 - Google Account の所持
 
 
@@ -25,7 +25,15 @@ draft: true
 
 ​      
 
-ソースコード全体を先に記述します。
+GAS を使用して bot を作成します。GAS で bot の処理を書き、その処理情報を webhook を通じて LINE Developer に送ります。    
+
+コードを書くためにスクリプトエディタを使いますが、後々[スプレットシート](https://www.google.com/intl/ja_jp/sheets/about/)も使うので、[スプレットシート](https://www.google.com/intl/ja_jp/sheets/about/)を通じてスクリプトエディタを開きます。スプレットシート -> ツール -> スクリプトエディタ で開けます。
+
+​      
+
+## コードと使い方
+
+解説に入る前にソースコードと使い方を先に記述します。
 
 ```js
 var ACCESS_TOKEN = '<your-access-token>';
@@ -104,8 +112,6 @@ function doPost(e) {
   });
   return ContentService.createTextOutput(JSON.stringify({'content': 'post ok'})).setMimeType(ContentService.MimeType.JSON);
 }
-
-
 
 function help() {
   return 'usage:  drive <command> \n----- command一覧 -----\nls: google driveのフォルダーを表示\n\
@@ -187,7 +193,6 @@ function getTargetFolder() {
   return checkFolder
 }
 
-
 function changeSaveFolder(folderName) {
   // 保存先のディレクトリを変更
   var mySheet = SpreadsheetApp.getActiveSheet();
@@ -234,7 +239,9 @@ function getImage(messageId) {
 
 
 
-## Usage
+## 使い方
+
+drive をトリガーにすることで bot を呼び出します。以下、drive 以降の引数を示します。
 
 | コマンド   | 引数        | 説明                           |
 | ---------- | ----------- | ------------------------------ |
@@ -246,5 +253,112 @@ function getImage(messageId) {
 | remaining  | -           | ドライブの残量を表示           |
 | help       | -           | Help を表示                    |
 
+​       
+
+## 設定
+
+- ACCESS_TOKEN:  LINE Developer で生成したアクセストークンをコピーペーストします。
+
+- MAIL_ADDRESS:  アクセスを可能にするメールアドレスを入力します。
+
+​          
+
+## コードの説明         
+
+送られたメッセージのタイプが画像だったら、現在の日付の名前の画像を作成して指定されているフォルダに保存します。
+
+```javascript
+  if ( JSON.parse(e.postData.contents).events[0].message.type == 'image' ) {
+    image = getImage(userImage)
+    if ( getTargetFolder() != 'false') {
+      var d = new Date();
+      var filename = Utilities.formatDate(d, 'Asia/Tokyo', 'yyyyMMddHHmmss') + '.png'
+      getTargetFolder().createFile(image.getBlob().getAs("image/png").setName(filename))
+    }    
+  }
+```
+
+このとき、指定されているフォルダを getTargetFolder 関数を用いて取得します。getTargetFolder 関数は、スプレットシートの1行目１列目に書かれているフォルダをドライブ内から探し、そのフォルダの id を返します。その id を元にどのフォルダに画像を保存するのかが決定されます。
+
+> スプレットシートは、画像を保存するためのフォルダ名を保存するために使用されます。GAS においてスプレットシードはデータベース代わりに使えるので簡単な実装をしたいときに非常に便利です。
+
+```javascript
+function getTargetFolder() {
+  var mySheet = SpreadsheetApp.getActiveSheet();
+  var folderName = mySheet.getRange(1,1).getValue();
+  var folders = DriveApp.getFolders();
+  var checkFolder = false
+  
+  while ( folders.hasNext() ) {
+    var folder = folders.next();
+    if ( folder == folderName ) {
+      checkFolder = true;
+      break;
+    }
+  }
+  if ( checkFolder ) return DriveApp.getFolderById(folder.getId());
+  return checkFolder
+}
+```
 
 
+
+画像を保存するためのフォルダを変更するためには、changeSaveFolder 関数を使います。変更したいフォルダ名をスプレットシートの１行目１列目に書き込みます。このとき、存在していないフォルダ名を設定しようとしたら警告文を出して更新しないようにします。
+
+```javascript
+function changeSaveFolder(folderName) {
+  // 保存先のディレクトリを変更
+  var mySheet = SpreadsheetApp.getActiveSheet();
+  var replyTxt = 'フォルダ \'' + folderName + '\' は存在していないyo';
+  if ( isFolder(folderName) ) { 
+    mySheet.getRange(1,1).setValue(folderName);
+    replyTxt = '保存先をフォルダ \'' + folderName + '\' に変更したyo';
+  }
+  return replyTxt;
+}
+```
+
+また、先ほど出てきたフォルダがすでに存在しているかをチェックする isFolder 関数は要所でよく使うので便利です。
+
+```javascript
+function isFolder(newFolderName){
+  // drive内のfolderを取得
+  var folders = DriveApp.getFolders();
+  var checkFolder = false;
+  
+  while ( folders.hasNext() ) {
+    var folder = folders.next();
+    if ( folder == newFolderName ) {
+      checkFolder = true;
+      break;
+    }
+  }
+  return checkFolder;
+}
+```
+
+isFolder 関数はフォルダを生成したいときなんかにも使えますね。driveMkdir 関数の5行目部分では、フォルダを作成するときにメールアドレスを指定してあげることでアクセス権を付与することができます。
+
+```javascript
+function driveMkdir(newFolderName) {
+  // ディレクトリの作成
+  var replyTxt = 'フォルダ \'' + newFolderName + '\' は存在しているyo';
+  if ( !isFolder(newFolderName) ) {
+    DriveApp.createFolder(newFolderName).addEditors(MAIL_ADDRESS);
+    replyTxt = 'フォルダ \'' + newFolderName + '\' を作成したyo';
+  }
+  return replyTxt;
+}
+```
+
+残りの処理は、他のサイトでもよく書かれている内容だったり、上記と似たような処理なので省略させていただきます。
+
+​        
+
+## Line Developers に webhook を登録する
+
+コードを書き終えたら 公開 -> ウェブアプリケーションとして導入 に進み webhook を取得します。URL が発行されるのでコピーして、LINE Developers の Message API にある Webhook settings にペーストします。ここで確認ボタンを押して成功が返ってくれば成功です。
+
+​           
+
+以上です。お疲れ様でした!
