@@ -1,0 +1,517 @@
+<!doctype html><html lang=en><head><title>画像を自動で google drive に保存する line bot を作成したので紹介 | Ikath Tech Blog</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=keywords content="Ikath Tech Blog"><meta property="og:locale" content="en_US"><meta property="og:type" content="article"><meta property="og:title" content="画像を自動で Google Drive に保存する Line Bot を作成したので紹介"><meta property="og:description" content="友人と連絡を取り合う時によく LINE を使うのですが、送信された画像をその時のイベントごとに自動で保存できたら便利だなと考え、line bot を作ることにしました。また、グループメンバーはみんな情報系出身のためコマンドライン風に実装してみました。
+ Requirement  Line …"><meta property="og:url" content="https://s-kaisei.github.io/Ikath-Tech-Blog/post/line-bot/"><meta property="og:image" content="images/%!s()"><link rel=apple-touch-icon sizes=180x180 href=https://s-kaisei.github.io/Ikath-Tech-Blog/images/icons/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=https://s-kaisei.github.io/Ikath-Tech-Blog/images/icons/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=https://s-kaisei.github.io/Ikath-Tech-Blog/images/icons/favicon-16x16.png><link rel=manifest href=https://s-kaisei.github.io/Ikath-Tech-Blog/images/icons/site.webmanifest><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><link rel=canonical href=https://s-kaisei.github.io/Ikath-Tech-Blog/post/line-bot/><link rel=stylesheet href=https://s-kaisei.github.io/Ikath-Tech-Blog/css/styles.86c6da248e485cdc7f340baeb04c29cf0499e12a33a387104028f046c1d4ba15aa3ef8a4bf8f44a2fba7f0263053fa54dc4d2f2baa3d6c8ebb3c69f7bdbded2b.css integrity="sha512-hsbaJI5IXNx/NAuusEwpzwSZ4Sozo4cQQCjwRsHUuhWqPvikv49Eovun8CYwU/pU3E0vK6o9bI67PGn3vb3tKw=="></head><body><div class=nav-drop><div class=nav-body><a href=https://s-kaisei.github.io/Ikath-Tech-Blog/about/ class=nav_item>AboutMe</a>
+<a href=https://s-kaisei.github.io/Ikath-Tech-Blog/post/ class=nav_item>Blog</a><div class=nav-close></div><div class=color_mode><label for=mode>Toggle Dark Mode</label>
+<input type=checkbox class=color_choice id=mode></div></div></div><header class=nav><nav class=nav-menu><a href=https://s-kaisei.github.io/Ikath-Tech-Blog/ class="nav-brand nav_item">Ikath Tech Blog</a><div class=nav_bar-wrap><div class=nav_bar></div></div></nav></header><main><div class="wrap mt post"><div><p class=post_date>24. October 2020</p><h1 class=post_title>画像を自動で Google Drive に保存する Line Bot を作成したので紹介</h1><div class=post_body><div class=post_inner><p>友人と連絡を取り合う時によく LINE を使うのですが、送信された画像をその時のイベントごとに自動で保存できたら便利だなと考え、line bot を作ることにしました。また、グループメンバーはみんな情報系出身のためコマンドライン風に実装してみました。</p><picture class=nav_logo>
+<source srcset=https://s-kaisei.github.io/Ikath-Tech-Blog/images/eg.png media="(prefers-color-scheme: dark)"><img srcset=https://s-kaisei.github.io/Ikath-Tech-Blog/images/eg.png alt=example></picture><h2 id=requirement>Requirement</h2><ul><li>Line Developer の登録と使いかた</li><li>Google Account の所持</li></ul><p>​</p><h2 id=gas-google-app-scripts-でコーディング>GAS (Google App Scripts) でコーディング</h2><blockquote><p>GAS でコーディングをするときは、1つの Google Account のみでログインしていないとだめみたいです。複数アカウントでログインしている場合は一度全てのアカウントをログアウトさせてから対象となるアカウントでログインしましょう。</p></blockquote><p>​</p><p>GAS を使用して bot を作成します。GAS で bot の処理を書き、その処理情報を webhook を通じて LINE Developer に送ります。</p><p>コードを書くためにスクリプトエディタを使いますが、後々<a href=https://www.google.com/intl/ja_jp/sheets/about/>スプレットシート</a>も使うので、<a href=https://www.google.com/intl/ja_jp/sheets/about/>スプレットシート</a>を通じてスクリプトエディタを開きます。スプレットシート -> ツール -> スクリプトエディタ で開けます。</p><p>​</p><h2 id=コードと使い方>コードと使い方</h2><p>解説に入る前にソースコードと使い方を先に記述します。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span><span class=lnt>195
+</span><span class=lnt>196
+</span><span class=lnt>197
+</span><span class=lnt>198
+</span><span class=lnt>199
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-js data-lang=js><span class=kd>var</span> <span class=nx>ACCESS_TOKEN</span> <span class=o>=</span> <span class=s1>&#39;&lt;your-access-token&gt;&#39;</span><span class=p>;</span>
+<span class=kd>var</span> <span class=nx>MAIL_ADDRESS</span> <span class=o>=</span> <span class=p>[</span><span class=s1>&#39;&lt;your-email&gt;&#39;</span><span class=p>]</span>
+
+<span class=kd>function</span> <span class=nx>doPost</span><span class=p>(</span><span class=nx>e</span><span class=p>)</span> <span class=p>{</span>
+  <span class=c1>// WebHookで受信した応答用Token
+</span><span class=c1></span>  <span class=kd>var</span> <span class=nx>replyToken</span> <span class=o>=</span> <span class=nx>JSON</span><span class=p>.</span><span class=nx>parse</span><span class=p>(</span><span class=nx>e</span><span class=p>.</span><span class=nx>postData</span><span class=p>.</span><span class=nx>contents</span><span class=p>).</span><span class=nx>events</span><span class=p>[</span><span class=mi>0</span><span class=p>].</span><span class=nx>replyToken</span><span class=p>;</span>
+  <span class=c1>// ユーザーのメッセージを取得
+</span><span class=c1></span>  <span class=kd>var</span> <span class=nx>userMessage</span> <span class=o>=</span> <span class=nx>JSON</span><span class=p>.</span><span class=nx>parse</span><span class=p>(</span><span class=nx>e</span><span class=p>.</span><span class=nx>postData</span><span class=p>.</span><span class=nx>contents</span><span class=p>).</span><span class=nx>events</span><span class=p>[</span><span class=mi>0</span><span class=p>].</span><span class=nx>message</span><span class=p>.</span><span class=nx>text</span><span class=p>;</span>
+  <span class=c1>// ユーザーがアップロードした画像を取得
+</span><span class=c1></span>  <span class=kd>var</span> <span class=nx>userImage</span> <span class=o>=</span> <span class=nx>JSON</span><span class=p>.</span><span class=nx>parse</span><span class=p>(</span><span class=nx>e</span><span class=p>.</span><span class=nx>postData</span><span class=p>.</span><span class=nx>contents</span><span class=p>).</span><span class=nx>events</span><span class=p>[</span><span class=mi>0</span><span class=p>].</span><span class=nx>message</span><span class=p>.</span><span class=nx>id</span><span class=p>;</span>
+  <span class=c1>// 応答メッセージ用のAPI URL
+</span><span class=c1></span>  <span class=kd>var</span> <span class=nx>url</span> <span class=o>=</span> <span class=s1>&#39;https://api.line.me/v2/bot/message/reply&#39;</span><span class=p>;</span>
+  
+  <span class=c1>// メッセージタイプが画像だったら日付を名前として保存する
+</span><span class=c1></span>  <span class=k>if</span> <span class=p>(</span> <span class=nx>JSON</span><span class=p>.</span><span class=nx>parse</span><span class=p>(</span><span class=nx>e</span><span class=p>.</span><span class=nx>postData</span><span class=p>.</span><span class=nx>contents</span><span class=p>).</span><span class=nx>events</span><span class=p>[</span><span class=mi>0</span><span class=p>].</span><span class=nx>message</span><span class=p>.</span><span class=nx>type</span> <span class=o>==</span> <span class=s1>&#39;image&#39;</span> <span class=p>)</span> <span class=p>{</span>
+    <span class=nx>image</span> <span class=o>=</span> <span class=nx>getImage</span><span class=p>(</span><span class=nx>userImage</span><span class=p>)</span>
+    <span class=k>if</span> <span class=p>(</span> <span class=nx>getTargetFolder</span><span class=p>()</span> <span class=o>!=</span> <span class=s1>&#39;false&#39;</span><span class=p>)</span> <span class=p>{</span>
+      <span class=kd>var</span> <span class=nx>d</span> <span class=o>=</span> <span class=k>new</span> <span class=nb>Date</span><span class=p>();</span>
+      <span class=kd>var</span> <span class=nx>filename</span> <span class=o>=</span> <span class=nx>Utilities</span><span class=p>.</span><span class=nx>formatDate</span><span class=p>(</span><span class=nx>d</span><span class=p>,</span> <span class=s1>&#39;Asia/Tokyo&#39;</span><span class=p>,</span> <span class=s1>&#39;yyyyMMddHHmmss&#39;</span><span class=p>)</span> <span class=o>+</span> <span class=s1>&#39;.png&#39;</span>
+      <span class=nx>getTargetFolder</span><span class=p>().</span><span class=nx>createFile</span><span class=p>(</span><span class=nx>image</span><span class=p>.</span><span class=nx>getBlob</span><span class=p>().</span><span class=nx>getAs</span><span class=p>(</span><span class=s2>&#34;image/png&#34;</span><span class=p>).</span><span class=nx>setName</span><span class=p>(</span><span class=nx>filename</span><span class=p>))</span>
+    <span class=p>}</span>    
+  <span class=p>}</span>
+  
+  <span class=c1>// drive をトリガーとして bot を呼ぶ
+</span><span class=c1></span>  <span class=k>if</span> <span class=p>(</span><span class=nx>userMessage</span><span class=p>.</span><span class=nx>split</span><span class=p>(</span><span class=s1>&#39; &#39;</span><span class=p>)[</span><span class=mi>0</span><span class=p>]</span> <span class=o>==</span> <span class=s1>&#39;drive&#39;</span><span class=p>)</span> <span class=p>{</span>
+    <span class=nx>replyTxt</span> <span class=o>=</span> <span class=nx>help</span><span class=p>();</span>
+    
+    <span class=k>switch</span><span class=p>(</span> <span class=nx>userMessage</span><span class=p>.</span><span class=nx>split</span><span class=p>(</span><span class=s1>&#39; &#39;</span><span class=p>)[</span><span class=mi>1</span><span class=p>]</span> <span class=p>)</span> <span class=p>{</span>
+      <span class=k>case</span> <span class=s1>&#39;ls&#39;</span><span class=o>:</span>
+        <span class=nx>replyTxt</span> <span class=o>=</span> <span class=nx>driveList</span><span class=p>()</span>
+        <span class=k>break</span><span class=p>;</span>
+        
+      <span class=k>case</span> <span class=s1>&#39;mkdir&#39;</span><span class=o>:</span>
+        <span class=nx>replyTxt</span> <span class=o>=</span> <span class=nx>driveMkdir</span><span class=p>(</span><span class=nx>userMessage</span><span class=p>.</span><span class=nx>split</span><span class=p>(</span><span class=s1>&#39; &#39;</span><span class=p>)[</span><span class=mi>2</span><span class=p>])</span>
+        <span class=k>break</span><span class=p>;</span>
+        
+      <span class=k>case</span> <span class=s1>&#39;savedir&#39;</span><span class=o>:</span>
+        <span class=nx>replyTxt</span> <span class=o>=</span> <span class=nx>changeSaveFolder</span><span class=p>(</span><span class=nx>userMessage</span><span class=p>.</span><span class=nx>split</span><span class=p>(</span><span class=s1>&#39; &#39;</span><span class=p>)[</span><span class=mi>2</span><span class=p>])</span>
+        <span class=k>break</span><span class=p>;</span>
+        
+      <span class=k>case</span> <span class=s1>&#39;currentdir&#39;</span><span class=o>:</span>
+        <span class=nx>replyTxt</span> <span class=o>=</span> <span class=nx>getCurrentFolder</span><span class=p>()</span>
+        <span class=k>break</span><span class=p>;</span>
+        
+      <span class=k>case</span> <span class=s1>&#39;remaining&#39;</span><span class=o>:</span>
+        <span class=nx>replyTxt</span> <span class=o>=</span> <span class=nx>driveRemaining</span><span class=p>();</span>
+        <span class=k>break</span><span class=p>;</span>
+        
+      <span class=k>case</span> <span class=s1>&#39;url&#39;</span><span class=o>:</span>
+        <span class=nx>replyTxt</span> <span class=o>=</span> <span class=nx>getDriveUrl</span><span class=p>(</span><span class=nx>userMessage</span><span class=p>.</span><span class=nx>split</span><span class=p>(</span><span class=s1>&#39; &#39;</span><span class=p>)[</span><span class=mi>2</span><span class=p>]);</span>
+        <span class=k>break</span><span class=p>;</span>
+        
+      <span class=k>case</span> <span class=s1>&#39;help&#39;</span><span class=o>:</span>
+        <span class=k>break</span><span class=p>;</span>
+        
+      <span class=k>default</span><span class=o>:</span>
+        <span class=nx>replyTxt</span> <span class=o>=</span> <span class=nx>help</span><span class=p>();</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+
+  <span class=nx>UrlFetchApp</span><span class=p>.</span><span class=nx>fetch</span><span class=p>(</span><span class=nx>url</span><span class=p>,</span> <span class=p>{</span>
+    <span class=s1>&#39;headers&#39;</span><span class=o>:</span> <span class=p>{</span>
+      <span class=s1>&#39;Content-Type&#39;</span><span class=o>:</span> <span class=s1>&#39;application/json; charset=UTF-8&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;Authorization&#39;</span><span class=o>:</span> <span class=s1>&#39;Bearer &#39;</span> <span class=o>+</span> <span class=nx>ACCESS_TOKEN</span><span class=p>,</span>
+    <span class=p>},</span>
+    <span class=s1>&#39;method&#39;</span><span class=o>:</span> <span class=s1>&#39;post&#39;</span><span class=p>,</span>
+    <span class=s1>&#39;payload&#39;</span><span class=o>:</span> <span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>({</span>
+      <span class=s1>&#39;replyToken&#39;</span><span class=o>:</span> <span class=nx>replyToken</span><span class=p>,</span>
+      <span class=s1>&#39;messages&#39;</span><span class=o>:</span> <span class=p>[{</span>
+        <span class=s1>&#39;type&#39;</span><span class=o>:</span> <span class=s1>&#39;text&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;text&#39;</span><span class=o>:</span> <span class=nx>replyTxt</span><span class=p>,</span>
+      <span class=p>}],</span>
+    <span class=p>}),</span>
+  <span class=p>});</span>
+  <span class=k>return</span> <span class=nx>ContentService</span><span class=p>.</span><span class=nx>createTextOutput</span><span class=p>(</span><span class=nx>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>({</span><span class=s1>&#39;content&#39;</span><span class=o>:</span> <span class=s1>&#39;post ok&#39;</span><span class=p>})).</span><span class=nx>setMimeType</span><span class=p>(</span><span class=nx>ContentService</span><span class=p>.</span><span class=nx>MimeType</span><span class=p>.</span><span class=nx>JSON</span><span class=p>);</span>
+<span class=p>}</span>
+
+<span class=kd>function</span> <span class=nx>help</span><span class=p>()</span> <span class=p>{</span>
+  <span class=k>return</span> <span class=s1>&#39;usage:  drive &lt;command&gt; \n----- command一覧 -----\nls: google driveのフォルダーを表示\n\
+</span><span class=s1>mkdir: google driveにフォルダーを作成\nsavedir: 写真の保存先を変更\ncurrentdir: 現在の保存先のフォルダーを表示\n\
+</span><span class=s1>url: フォルダーのURLを取得\nremaining: google driveの空き容量を確認\nhelp helpを表示\n-------------------------------\n\
+</span><span class=s1>e.g.1: drive ls\n\
+</span><span class=s1>e.g.2: drive mkdir hoge\n\
+</span><span class=s1>e.g.3: drive savedir hoge\n\
+</span><span class=s1>e.g.4: drive currentdir\n\
+</span><span class=s1>e.g.5: drive url hoge\n\
+</span><span class=s1>e.g.6: drive remaining\n\
+</span><span class=s1>e.g.7: drive help&#39;</span>
+<span class=p>}</span>
+
+<span class=kd>function</span> <span class=nx>driveList</span><span class=p>(){</span>
+  <span class=c1>// drive内のfolderを取得
+</span><span class=c1></span>  <span class=kd>var</span> <span class=nx>folders</span> <span class=o>=</span> <span class=nx>DriveApp</span><span class=p>.</span><span class=nx>getFolders</span><span class=p>();</span>
+  <span class=kd>var</span> <span class=nx>replyTxt</span> <span class=o>=</span> <span class=s1>&#39;&#39;</span><span class=p>;</span>
+  
+  <span class=k>if</span> <span class=p>(</span> <span class=o>!</span><span class=nx>folders</span><span class=p>.</span><span class=nx>hasNext</span><span class=p>()</span> <span class=p>)</span> <span class=p>{</span>
+    <span class=nx>replyTxt</span> <span class=o>=</span> <span class=s1>&#39;ドライブ内にフォルダは存在しないyo&#39;</span><span class=p>;</span>
+    <span class=k>return</span> <span class=nx>replyTxt</span><span class=p>;</span>
+  <span class=p>}</span>
+  
+  <span class=k>while</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span> <span class=p>{</span> 
+    <span class=nx>replyTxt</span> <span class=o>+=</span> <span class=nx>folders</span><span class=p>.</span><span class=nx>next</span><span class=p>();</span> 
+    <span class=k>if</span> <span class=p>(</span> <span class=o>!</span><span class=nx>folders</span><span class=p>.</span><span class=nx>hasNext</span><span class=p>()</span> <span class=p>)</span> <span class=k>break</span><span class=p>;</span>
+    <span class=nx>replyTxt</span> <span class=o>+=</span> <span class=s1>&#39;\n&#39;</span><span class=p>;</span> 
+  <span class=p>}</span>
+  <span class=k>return</span> <span class=nx>replyTxt</span>
+<span class=p>}</span>
+
+<span class=kd>function</span> <span class=nx>driveMkdir</span><span class=p>(</span><span class=nx>newFolderName</span><span class=p>)</span> <span class=p>{</span>
+  <span class=c1>// ディレクトリの作成
+</span><span class=c1></span>  <span class=kd>var</span> <span class=nx>replyTxt</span> <span class=o>=</span> <span class=s1>&#39;フォルダ \&#39;&#39;</span> <span class=o>+</span> <span class=nx>newFolderName</span> <span class=o>+</span> <span class=s1>&#39;\&#39; は存在しているyo&#39;</span><span class=p>;</span>
+  <span class=k>if</span> <span class=p>(</span> <span class=o>!</span><span class=nx>isFolder</span><span class=p>(</span><span class=nx>newFolderName</span><span class=p>)</span> <span class=p>)</span> <span class=p>{</span>
+    <span class=nx>DriveApp</span><span class=p>.</span><span class=nx>createFolder</span><span class=p>(</span><span class=nx>newFolderName</span><span class=p>).</span><span class=nx>addEditors</span><span class=p>(</span><span class=nx>MAIL_ADDRESS</span><span class=p>);</span>
+    <span class=nx>replyTxt</span> <span class=o>=</span> <span class=s1>&#39;フォルダ \&#39;&#39;</span> <span class=o>+</span> <span class=nx>newFolderName</span> <span class=o>+</span> <span class=s1>&#39;\&#39; を作成したyo&#39;</span><span class=p>;</span>
+  <span class=p>}</span>
+  <span class=k>return</span> <span class=nx>replyTxt</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=kd>function</span> <span class=nx>isFolder</span><span class=p>(</span><span class=nx>newFolderName</span><span class=p>){</span>
+  <span class=c1>// drive内のfolderを取得
+</span><span class=c1></span>  <span class=kd>var</span> <span class=nx>folders</span> <span class=o>=</span> <span class=nx>DriveApp</span><span class=p>.</span><span class=nx>getFolders</span><span class=p>();</span>
+  <span class=kd>var</span> <span class=nx>checkFolder</span> <span class=o>=</span> <span class=kc>false</span><span class=p>;</span>
+  
+  <span class=k>while</span> <span class=p>(</span> <span class=nx>folders</span><span class=p>.</span><span class=nx>hasNext</span><span class=p>()</span> <span class=p>)</span> <span class=p>{</span>
+    <span class=kd>var</span> <span class=nx>folder</span> <span class=o>=</span> <span class=nx>folders</span><span class=p>.</span><span class=nx>next</span><span class=p>();</span>
+    <span class=k>if</span> <span class=p>(</span> <span class=nx>folder</span> <span class=o>==</span> <span class=nx>newFolderName</span> <span class=p>)</span> <span class=p>{</span>
+      <span class=nx>checkFolder</span> <span class=o>=</span> <span class=kc>true</span><span class=p>;</span>
+      <span class=k>break</span><span class=p>;</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+  <span class=k>return</span> <span class=nx>checkFolder</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=kd>function</span> <span class=nx>getCurrentFolder</span><span class=p>()</span> <span class=p>{</span>
+  <span class=c1>// 現在保存先に指定しているディレクトリを表示
+</span><span class=c1></span>  <span class=kd>var</span> <span class=nx>mySheet</span> <span class=o>=</span> <span class=nx>SpreadsheetApp</span><span class=p>.</span><span class=nx>getActiveSheet</span><span class=p>();</span>
+  <span class=kd>var</span> <span class=nx>folderName</span> <span class=o>=</span> <span class=nx>mySheet</span><span class=p>.</span><span class=nx>getRange</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=mi>1</span><span class=p>).</span><span class=nx>getValue</span><span class=p>();</span>
+  <span class=k>return</span> <span class=s1>&#39;現在の保存先フォルダーは \&#39;&#39;</span> <span class=o>+</span> <span class=nx>folderName</span> <span class=o>+</span> <span class=s1>&#39;\&#39; だyo&#39;</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=kd>function</span> <span class=nx>getTargetFolder</span><span class=p>()</span> <span class=p>{</span>
+  <span class=kd>var</span> <span class=nx>mySheet</span> <span class=o>=</span> <span class=nx>SpreadsheetApp</span><span class=p>.</span><span class=nx>getActiveSheet</span><span class=p>();</span>
+  <span class=kd>var</span> <span class=nx>folderName</span> <span class=o>=</span> <span class=nx>mySheet</span><span class=p>.</span><span class=nx>getRange</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=mi>1</span><span class=p>).</span><span class=nx>getValue</span><span class=p>();</span>
+  <span class=kd>var</span> <span class=nx>folders</span> <span class=o>=</span> <span class=nx>DriveApp</span><span class=p>.</span><span class=nx>getFolders</span><span class=p>();</span>
+  <span class=kd>var</span> <span class=nx>checkFolder</span> <span class=o>=</span> <span class=kc>false</span>
+  
+  <span class=k>while</span> <span class=p>(</span> <span class=nx>folders</span><span class=p>.</span><span class=nx>hasNext</span><span class=p>()</span> <span class=p>)</span> <span class=p>{</span>
+    <span class=kd>var</span> <span class=nx>folder</span> <span class=o>=</span> <span class=nx>folders</span><span class=p>.</span><span class=nx>next</span><span class=p>();</span>
+    <span class=k>if</span> <span class=p>(</span> <span class=nx>folder</span> <span class=o>==</span> <span class=nx>folderName</span> <span class=p>)</span> <span class=p>{</span>
+      <span class=nx>checkFolder</span> <span class=o>=</span> <span class=kc>true</span><span class=p>;</span>
+      <span class=k>break</span><span class=p>;</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+  <span class=k>if</span> <span class=p>(</span> <span class=nx>checkFolder</span> <span class=p>)</span> <span class=k>return</span> <span class=nx>DriveApp</span><span class=p>.</span><span class=nx>getFolderById</span><span class=p>(</span><span class=nx>folder</span><span class=p>.</span><span class=nx>getId</span><span class=p>());</span>
+  <span class=k>return</span> <span class=nx>checkFolder</span>
+<span class=p>}</span>
+
+<span class=kd>function</span> <span class=nx>changeSaveFolder</span><span class=p>(</span><span class=nx>folderName</span><span class=p>)</span> <span class=p>{</span>
+  <span class=c1>// 保存先のディレクトリを変更
+</span><span class=c1></span>  <span class=kd>var</span> <span class=nx>mySheet</span> <span class=o>=</span> <span class=nx>SpreadsheetApp</span><span class=p>.</span><span class=nx>getActiveSheet</span><span class=p>();</span>
+  <span class=kd>var</span> <span class=nx>replyTxt</span> <span class=o>=</span> <span class=s1>&#39;フォルダ \&#39;&#39;</span> <span class=o>+</span> <span class=nx>folderName</span> <span class=o>+</span> <span class=s1>&#39;\&#39; は存在していないyo&#39;</span><span class=p>;</span>
+  <span class=k>if</span> <span class=p>(</span> <span class=nx>isFolder</span><span class=p>(</span><span class=nx>folderName</span><span class=p>)</span> <span class=p>)</span> <span class=p>{</span> 
+    <span class=nx>mySheet</span><span class=p>.</span><span class=nx>getRange</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=mi>1</span><span class=p>).</span><span class=nx>setValue</span><span class=p>(</span><span class=nx>folderName</span><span class=p>);</span>
+    <span class=nx>replyTxt</span> <span class=o>=</span> <span class=s1>&#39;保存先をフォルダ \&#39;&#39;</span> <span class=o>+</span> <span class=nx>folderName</span> <span class=o>+</span> <span class=s1>&#39;\&#39; に変更したyo&#39;</span><span class=p>;</span>
+  <span class=p>}</span>
+  <span class=k>return</span> <span class=nx>replyTxt</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=kd>function</span> <span class=nx>driveRemaining</span><span class=p>(){</span>
+  <span class=c1>// 残りの容量を確認
+</span><span class=c1></span>  <span class=k>return</span> <span class=s1>&#39;残りの容量は &#39;</span> <span class=o>+</span> <span class=nx>DriveApp</span><span class=p>.</span><span class=nx>getStorageLimit</span><span class=p>()</span> <span class=o>+</span> <span class=s1>&#39;bytesだyo&#39;</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=kd>function</span> <span class=nx>getDriveUrl</span><span class=p>(</span><span class=nx>folderName</span><span class=p>)</span> <span class=p>{</span>
+  <span class=c1>// 保存されている drive の URL を取得
+</span><span class=c1></span>  <span class=kd>var</span> <span class=nx>folders</span> <span class=o>=</span> <span class=nx>DriveApp</span><span class=p>.</span><span class=nx>getFolders</span><span class=p>();</span>
+  <span class=kd>var</span> <span class=nx>replyTxt</span> <span class=o>=</span> <span class=s1>&#39;フォルダ \&#39;&#39;</span> <span class=o>+</span> <span class=nx>folderName</span> <span class=o>+</span> <span class=s1>&#39;\&#39; は存在していないyo&#39;</span><span class=p>;</span>
+  
+  <span class=k>while</span> <span class=p>(</span> <span class=nx>folders</span><span class=p>.</span><span class=nx>hasNext</span><span class=p>()</span> <span class=p>)</span> <span class=p>{</span>
+    <span class=kd>var</span> <span class=nx>folder</span> <span class=o>=</span> <span class=nx>folders</span><span class=p>.</span><span class=nx>next</span><span class=p>();</span>
+    <span class=k>if</span> <span class=p>(</span> <span class=nx>folder</span> <span class=o>==</span> <span class=nx>folderName</span> <span class=p>)</span> <span class=p>{</span>
+      <span class=nx>replyTxt</span> <span class=o>=</span> <span class=nx>folder</span><span class=p>.</span><span class=nx>getUrl</span><span class=p>();</span>
+      <span class=k>break</span><span class=p>;</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+  <span class=k>return</span> <span class=nx>replyTxt</span><span class=p>;</span> 
+<span class=p>}</span>
+
+<span class=kd>function</span> <span class=nx>getImage</span><span class=p>(</span><span class=nx>messageId</span><span class=p>)</span> <span class=p>{</span>
+  <span class=kd>var</span> <span class=nx>url</span> <span class=o>=</span> <span class=s2>&#34;https://api.line.me/v2/bot/message/&#34;</span> <span class=o>+</span> <span class=nx>messageId</span> <span class=o>+</span> <span class=s2>&#34;/content&#34;</span><span class=p>;</span>
+  
+  <span class=k>return</span> <span class=nx>UrlFetchApp</span><span class=p>.</span><span class=nx>fetch</span><span class=p>(</span><span class=nx>url</span><span class=p>,</span> <span class=p>{</span>
+    <span class=s1>&#39;headers&#39;</span><span class=o>:</span> <span class=p>{</span>
+      <span class=s1>&#39;Content-Type&#39;</span><span class=o>:</span> <span class=s1>&#39;application/json; charset=UTF-8&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;Authorization&#39;</span><span class=o>:</span> <span class=s1>&#39;Bearer &#39;</span> <span class=o>+</span> <span class=nx>ACCESS_TOKEN</span><span class=p>,</span>
+    <span class=p>},</span>
+    <span class=s1>&#39;method&#39;</span><span class=o>:</span> <span class=s1>&#39;get&#39;</span>
+  <span class=p>});</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><h2 id=使い方>使い方</h2><p>drive をトリガーにすることで bot を呼び出します。以下、drive 以降の引数を示します。</p><table><thead><tr><th>コマンド</th><th>引数</th><th>説明</th></tr></thead><tbody><tr><td>ls</td><td>-</td><td>ドライブ内のフォルダを表示</td></tr><tr><td>mkdir</td><td>folder name</td><td>ドライブ内にフォルダを作成</td></tr><tr><td>savedir</td><td>folder name</td><td>保存先のフォルダを設定</td></tr><tr><td>currentdir</td><td>-</td><td>現在の保存先のフォルダーを表示</td></tr><tr><td>url</td><td>folder name</td><td>フォルダの共有 URL を表示</td></tr><tr><td>remaining</td><td>-</td><td>ドライブの残量を表示</td></tr><tr><td>help</td><td>-</td><td>Help を表示</td></tr></tbody></table><p>​</p><h2 id=設定>設定</h2><ul><li><p>ACCESS_TOKEN: LINE Developer で生成したアクセストークンをコピーペーストします。</p></li><li><p>MAIL_ADDRESS: アクセスを可能にするメールアドレスを入力します。</p></li></ul><p>​</p><h2 id=コードの説明>コードの説明</h2><p>送られたメッセージのタイプが画像だったら、現在の日付の名前の画像を作成して指定されているフォルダに保存します。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-javascript data-lang=javascript>  <span class=k>if</span> <span class=p>(</span> <span class=nx>JSON</span><span class=p>.</span><span class=nx>parse</span><span class=p>(</span><span class=nx>e</span><span class=p>.</span><span class=nx>postData</span><span class=p>.</span><span class=nx>contents</span><span class=p>).</span><span class=nx>events</span><span class=p>[</span><span class=mi>0</span><span class=p>].</span><span class=nx>message</span><span class=p>.</span><span class=nx>type</span> <span class=o>==</span> <span class=s1>&#39;image&#39;</span> <span class=p>)</span> <span class=p>{</span>
+    <span class=nx>image</span> <span class=o>=</span> <span class=nx>getImage</span><span class=p>(</span><span class=nx>userImage</span><span class=p>)</span>
+    <span class=k>if</span> <span class=p>(</span> <span class=nx>getTargetFolder</span><span class=p>()</span> <span class=o>!=</span> <span class=s1>&#39;false&#39;</span><span class=p>)</span> <span class=p>{</span>
+      <span class=kd>var</span> <span class=nx>d</span> <span class=o>=</span> <span class=k>new</span> <span class=nb>Date</span><span class=p>();</span>
+      <span class=kd>var</span> <span class=nx>filename</span> <span class=o>=</span> <span class=nx>Utilities</span><span class=p>.</span><span class=nx>formatDate</span><span class=p>(</span><span class=nx>d</span><span class=p>,</span> <span class=s1>&#39;Asia/Tokyo&#39;</span><span class=p>,</span> <span class=s1>&#39;yyyyMMddHHmmss&#39;</span><span class=p>)</span> <span class=o>+</span> <span class=s1>&#39;.png&#39;</span>
+      <span class=nx>getTargetFolder</span><span class=p>().</span><span class=nx>createFile</span><span class=p>(</span><span class=nx>image</span><span class=p>.</span><span class=nx>getBlob</span><span class=p>().</span><span class=nx>getAs</span><span class=p>(</span><span class=s2>&#34;image/png&#34;</span><span class=p>).</span><span class=nx>setName</span><span class=p>(</span><span class=nx>filename</span><span class=p>))</span>
+    <span class=p>}</span>    
+  <span class=p>}</span>
+</code></pre></td></tr></table></div></div><p>このとき、指定されているフォルダを getTargetFolder 関数を用いて取得します。getTargetFolder 関数は、スプレットシートの1行目１列目に書かれているフォルダをドライブ内から探し、そのフォルダの id を返します。その id を元にどのフォルダに画像を保存するのかが決定されます。</p><blockquote><p>スプレットシートは、画像を保存するためのフォルダ名を保存するために使用されます。GAS においてスプレットシードはデータベース代わりに使えるので簡単な実装をしたいときに非常に便利です。</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-javascript data-lang=javascript><span class=kd>function</span> <span class=nx>getTargetFolder</span><span class=p>()</span> <span class=p>{</span>
+  <span class=kd>var</span> <span class=nx>mySheet</span> <span class=o>=</span> <span class=nx>SpreadsheetApp</span><span class=p>.</span><span class=nx>getActiveSheet</span><span class=p>();</span>
+  <span class=kd>var</span> <span class=nx>folderName</span> <span class=o>=</span> <span class=nx>mySheet</span><span class=p>.</span><span class=nx>getRange</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=mi>1</span><span class=p>).</span><span class=nx>getValue</span><span class=p>();</span>
+  <span class=kd>var</span> <span class=nx>folders</span> <span class=o>=</span> <span class=nx>DriveApp</span><span class=p>.</span><span class=nx>getFolders</span><span class=p>();</span>
+  <span class=kd>var</span> <span class=nx>checkFolder</span> <span class=o>=</span> <span class=kc>false</span>
+  
+  <span class=k>while</span> <span class=p>(</span> <span class=nx>folders</span><span class=p>.</span><span class=nx>hasNext</span><span class=p>()</span> <span class=p>)</span> <span class=p>{</span>
+    <span class=kd>var</span> <span class=nx>folder</span> <span class=o>=</span> <span class=nx>folders</span><span class=p>.</span><span class=nx>next</span><span class=p>();</span>
+    <span class=k>if</span> <span class=p>(</span> <span class=nx>folder</span> <span class=o>==</span> <span class=nx>folderName</span> <span class=p>)</span> <span class=p>{</span>
+      <span class=nx>checkFolder</span> <span class=o>=</span> <span class=kc>true</span><span class=p>;</span>
+      <span class=k>break</span><span class=p>;</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+  <span class=k>if</span> <span class=p>(</span> <span class=nx>checkFolder</span> <span class=p>)</span> <span class=k>return</span> <span class=nx>DriveApp</span><span class=p>.</span><span class=nx>getFolderById</span><span class=p>(</span><span class=nx>folder</span><span class=p>.</span><span class=nx>getId</span><span class=p>());</span>
+  <span class=k>return</span> <span class=nx>checkFolder</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><p>画像を保存するためのフォルダを変更するためには、changeSaveFolder 関数を使います。変更したいフォルダ名をスプレットシートの１行目１列目に書き込みます。このとき、存在していないフォルダ名を設定しようとしたら警告文を出して更新しないようにします。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-javascript data-lang=javascript><span class=kd>function</span> <span class=nx>changeSaveFolder</span><span class=p>(</span><span class=nx>folderName</span><span class=p>)</span> <span class=p>{</span>
+  <span class=c1>// 保存先のディレクトリを変更
+</span><span class=c1></span>  <span class=kd>var</span> <span class=nx>mySheet</span> <span class=o>=</span> <span class=nx>SpreadsheetApp</span><span class=p>.</span><span class=nx>getActiveSheet</span><span class=p>();</span>
+  <span class=kd>var</span> <span class=nx>replyTxt</span> <span class=o>=</span> <span class=s1>&#39;フォルダ \&#39;&#39;</span> <span class=o>+</span> <span class=nx>folderName</span> <span class=o>+</span> <span class=s1>&#39;\&#39; は存在していないyo&#39;</span><span class=p>;</span>
+  <span class=k>if</span> <span class=p>(</span> <span class=nx>isFolder</span><span class=p>(</span><span class=nx>folderName</span><span class=p>)</span> <span class=p>)</span> <span class=p>{</span> 
+    <span class=nx>mySheet</span><span class=p>.</span><span class=nx>getRange</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=mi>1</span><span class=p>).</span><span class=nx>setValue</span><span class=p>(</span><span class=nx>folderName</span><span class=p>);</span>
+    <span class=nx>replyTxt</span> <span class=o>=</span> <span class=s1>&#39;保存先をフォルダ \&#39;&#39;</span> <span class=o>+</span> <span class=nx>folderName</span> <span class=o>+</span> <span class=s1>&#39;\&#39; に変更したyo&#39;</span><span class=p>;</span>
+  <span class=p>}</span>
+  <span class=k>return</span> <span class=nx>replyTxt</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><p>また、先ほど出てきたフォルダがすでに存在しているかをチェックする isFolder 関数は要所でよく使うので便利です。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-javascript data-lang=javascript><span class=kd>function</span> <span class=nx>isFolder</span><span class=p>(</span><span class=nx>newFolderName</span><span class=p>){</span>
+  <span class=c1>// drive内のfolderを取得
+</span><span class=c1></span>  <span class=kd>var</span> <span class=nx>folders</span> <span class=o>=</span> <span class=nx>DriveApp</span><span class=p>.</span><span class=nx>getFolders</span><span class=p>();</span>
+  <span class=kd>var</span> <span class=nx>checkFolder</span> <span class=o>=</span> <span class=kc>false</span><span class=p>;</span>
+  
+  <span class=k>while</span> <span class=p>(</span> <span class=nx>folders</span><span class=p>.</span><span class=nx>hasNext</span><span class=p>()</span> <span class=p>)</span> <span class=p>{</span>
+    <span class=kd>var</span> <span class=nx>folder</span> <span class=o>=</span> <span class=nx>folders</span><span class=p>.</span><span class=nx>next</span><span class=p>();</span>
+    <span class=k>if</span> <span class=p>(</span> <span class=nx>folder</span> <span class=o>==</span> <span class=nx>newFolderName</span> <span class=p>)</span> <span class=p>{</span>
+      <span class=nx>checkFolder</span> <span class=o>=</span> <span class=kc>true</span><span class=p>;</span>
+      <span class=k>break</span><span class=p>;</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
+  <span class=k>return</span> <span class=nx>checkFolder</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><p>isFolder 関数はフォルダを生成したいときなんかにも使えますね。driveMkdir 関数の5行目部分では、フォルダを作成するときにメールアドレスを指定してあげることでアクセス権を付与することができます。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-javascript data-lang=javascript><span class=kd>function</span> <span class=nx>driveMkdir</span><span class=p>(</span><span class=nx>newFolderName</span><span class=p>)</span> <span class=p>{</span>
+  <span class=c1>// ディレクトリの作成
+</span><span class=c1></span>  <span class=kd>var</span> <span class=nx>replyTxt</span> <span class=o>=</span> <span class=s1>&#39;フォルダ \&#39;&#39;</span> <span class=o>+</span> <span class=nx>newFolderName</span> <span class=o>+</span> <span class=s1>&#39;\&#39; は存在しているyo&#39;</span><span class=p>;</span>
+  <span class=k>if</span> <span class=p>(</span> <span class=o>!</span><span class=nx>isFolder</span><span class=p>(</span><span class=nx>newFolderName</span><span class=p>)</span> <span class=p>)</span> <span class=p>{</span>
+    <span class=nx>DriveApp</span><span class=p>.</span><span class=nx>createFolder</span><span class=p>(</span><span class=nx>newFolderName</span><span class=p>).</span><span class=nx>addEditors</span><span class=p>(</span><span class=nx>MAIL_ADDRESS</span><span class=p>);</span>
+    <span class=nx>replyTxt</span> <span class=o>=</span> <span class=s1>&#39;フォルダ \&#39;&#39;</span> <span class=o>+</span> <span class=nx>newFolderName</span> <span class=o>+</span> <span class=s1>&#39;\&#39; を作成したyo&#39;</span><span class=p>;</span>
+  <span class=p>}</span>
+  <span class=k>return</span> <span class=nx>replyTxt</span><span class=p>;</span>
+<span class=p>}</span>
+</code></pre></td></tr></table></div></div><p>残りの処理は、他のサイトでもよく書かれている内容だったり、上記と似たような処理なので省略させていただきます。</p><p>​</p><h2 id=line-developers-に-webhook-を登録する>Line Developers に webhook を登録する</h2><p>コードを書き終えたら 公開 -> ウェブアプリケーションとして導入 に進み webhook を取得します。URL が発行されるのでコピーして、LINE Developers の Message API にある Webhook settings にペーストします。ここで確認ボタンを押して成功が返ってくれば成功です。</p><p>​</p><p>以上です。お疲れ様でした!</p></div><div class="post_extra mb-2"><div class=copy data-before="Share Story" data-after="Link Copied"><svg class="icon"><use xlink:href="#copy"/></svg></div></div><div></div></div></div><a href=https://s-kaisei.github.io/Ikath-Tech-Blog/ class=post_nav><span class=post_next>The Latest<svg class="icon icon_scale"><use xlink:href="#double-arrow"/></svg></span></a></div></main><footer class="footer wrap pale"><p>&copy;&nbsp;<span class=year></span>&nbsp;Ikath Tech Blog</p><p class="attribution upcase">Designed by <a href="<no value>" target=_blank title="Linkedin Profile" rel=nonopener><no value></a></p></footer><script src=https://s-kaisei.github.io/Ikath-Tech-Blog/js/index.min.1a678c05b3d77bbd645a832d2c854f0e0728782ee0b9cc73940636c782bb1ec995125d2538c99ba876614f4e649bf837b9f43ff6bbd68a8d48a2a720e2dd3656.js></script><svg width="0" height="0" class="hidden"><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 699.428 699.428" id="copy"><path d="M502.714.0H240.428C194.178.0 153 42.425 153 87.429l-25.267.59c-46.228.0-84.019 41.834-84.019 86.838V612c0 45.004 41.179 87.428 87.429 87.428H459c46.249.0 87.428-42.424 87.428-87.428h21.857c46.25.0 87.429-42.424 87.429-87.428v-349.19L502.714.0zM459 655.715H131.143c-22.95.0-43.714-21.441-43.714-43.715V174.857c0-22.272 18.688-42.993 41.638-42.993l23.933-.721v393.429C153 569.576 194.178 612 240.428 612h262.286c0 22.273-20.765 43.715-43.714 43.715zm153-131.143c0 22.271-20.765 43.713-43.715 43.713H240.428c-22.95.0-43.714-21.441-43.714-43.713V87.429c0-22.272 20.764-43.714 43.714-43.714H459c-.351 50.337.0 87.975.0 87.975.0 45.419 40.872 86.882 87.428 86.882H612v306zm-65.572-349.715c-23.277.0-43.714-42.293-43.714-64.981V44.348L612 174.857h-65.572zm-43.714 131.537H306c-12.065.0-21.857 9.77-21.857 21.835s9.792 21.835 21.857 21.835h196.714c12.065.0 21.857-9.771 21.857-21.835.0-12.065-9.792-21.835-21.857-21.835zm0 109.176H306c-12.065.0-21.857 9.77-21.857 21.834.0 12.066 9.792 21.836 21.857 21.836h196.714c12.065.0 21.857-9.77 21.857-21.836.0-12.064-9.792-21.834-21.857-21.834z"/></symbol><symbol viewBox="0 0 53 42" xmlns="http://www.w3.org/2000/svg" id="double-arrow"><path d="M.595 39.653a1.318 1.318.0 010-1.864L16.55 21.833a1.318 1.318.0 000-1.863L.595 4.014a1.318 1.318.0 010-1.863L2.125.62a1.318 1.318.0 011.864.0l19.35 19.349a1.318 1.318.0 010 1.863l-19.35 19.35a1.318 1.318.0 01-1.863.0zm29 0a1.318 1.318.0 010-1.864L45.55 21.833a1.318 1.318.0 000-1.863L29.595 4.014a1.318 1.318.0 010-1.863l1.53-1.53a1.318 1.318.0 011.864.0l19.35 19.349a1.318 1.318.0 010 1.863l-19.35 19.35a1.318 1.318.0 01-1.863.0z"/></symbol></svg></body></html>

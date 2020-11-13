@@ -25,7 +25,15 @@ NVIDIA JETSON AGX XAVIER DEVELOPER KIT</description></item><item><title>サイ�
 1 2 guessSyntax = true lineNos = true なお、番号とコードを分割して表示したい場合は、20行目を true にします。
 1 lineNumbersInTable = true また、上記の設定をした場合 22行目を 4 に設定した方がコードが見やすくなります。
 1 tabWidth = 4 フッターにメニューを追加 data/ に menu.yml を追加する。
-1 2 3 4 - item: About url: about/ - item: Blog url: post/ About を追加したいときは</description></item><item><title>自動走行するラジコンを作成</title><link>https://s-kaisei.github.io/Ikath-Tech-Blog/post/rcar/</link><pubDate>Sat, 24 Oct 2020 05:43:11 +0900</pubDate><guid>https://s-kaisei.github.io/Ikath-Tech-Blog/post/rcar/</guid><description>概要 Raspbeey Pi に学習させたモデルを搭載して、道路の左車線を自動で走行するラジコンカーです。今回は直線のみを対象にし、道路からはみ出さないように設計しました。見た目が戦車ですので、停止時に物体検出を行い自作砲台 (3Dプリンターで作成) を使って輪ゴムを発射するオプションも加えてみました。
+1 2 3 4 - item: About url: about/ - item: Blog url: post/ About を追加したいときは</description></item><item><title>画像を自動で Google Drive に保存する Line Bot を作成したので紹介</title><link>https://s-kaisei.github.io/Ikath-Tech-Blog/post/line-bot/</link><pubDate>Sat, 24 Oct 2020 06:29:56 +0900</pubDate><guid>https://s-kaisei.github.io/Ikath-Tech-Blog/post/line-bot/</guid><description>友人と連絡を取り合う時によく LINE を使うのですが、送信された画像をその時のイベントごとに自動で保存できたら便利だなと考え、line bot を作ることにしました。また、グループメンバーはみんな情報系出身のためコマンドライン風に実装してみました。
+Requirement Line Developer の登録と使いかた Google Account の所持 ​
+GAS (Google App Scripts) でコーディング GAS でコーディングをするときは、1つの Google Account のみでログインしていないとだめみたいです。複数アカウントでログインしている場合は一度全てのアカウントをログアウトさせてから対象となるアカウントでログインしましょう。
+​
+GAS を使用して bot を作成します。GAS で bot の処理を書き、その処理情報を webhook を通じて LINE Developer に送ります。
+コードを書くためにスクリプトエディタを使いますが、後々スプレットシートも使うので、スプレットシートを通じてスクリプトエディタを開きます。スプレットシート -&amp;gt; ツール -&amp;gt; スクリプトエディタ で開けます。
+​
+コードと使い方 解説に入る前にソースコードと使い方を先に記述します。
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 var ACCESS_TOKEN = &amp;#39;&amp;lt;your-access-token&amp;gt;&amp;#39;; var MAIL_ADDRESS = [&amp;#39;&amp;lt;your-email&amp;gt;&amp;#39;] function doPost(e) { // WebHookで受信した応答用Token var replyToken = JSON.</description></item><item><title>自動走行するラジコンを作成</title><link>https://s-kaisei.github.io/Ikath-Tech-Blog/post/rcar/</link><pubDate>Sat, 24 Oct 2020 05:43:11 +0900</pubDate><guid>https://s-kaisei.github.io/Ikath-Tech-Blog/post/rcar/</guid><description>概要 Raspbeey Pi に学習させたモデルを搭載して、道路の左車線を自動で走行するラジコンカーです。今回は直線のみを対象にし、道路からはみ出さないように設計しました。見た目が戦車ですので、停止時に物体検出を行い自作砲台 (3Dプリンターで作成) を使って輪ゴムを発射するオプションも加えてみました。
 [完成形]
 [全体の流れのイメージ]
 開発環境 Raspberry Pi 3B raspbian 9.4 Jupyter Notebook 4.4.0 Python 3.5.3 TensorFlow 1.11.0 OpenCV 3.4.4 行ったこと ラジコンの製作
