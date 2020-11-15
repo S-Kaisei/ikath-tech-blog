@@ -10,16 +10,6 @@ draft: false
 
 - [Hugo × GitHub Pages でブログを公開するまでの手順を紹介](https://s-kaisei.github.io/Ikath-Tech-Blog/post/blog-introduce/) を終えている
 
-{{< mylist >}}
-
-kaisei
-
-Kaisei
-
-{{< /mylist >}}
-
-
-
 ​      
 
 ## 画像・動画を表示する
