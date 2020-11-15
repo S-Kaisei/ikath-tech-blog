@@ -1,5 +1,5 @@
 ---
-title: "サイトをカスタマイズするためのノウハウ"
+title: "newsroom テーマと HUGO を活用してサイトをカスタマイズ"
 date: 2020-10-24T08:08:16+09:00
 draft: false
 ---
@@ -9,6 +9,14 @@ draft: false
 ## Requirement
 
 - [Hugo × GitHub Pages でブログを公開するまでの手順を紹介](https://s-kaisei.github.io/Ikath-Tech-Blog/post/blog-introduce/) を終えている
+
+{{< mylist >}}
+
+kaisei
+
+Kaisei
+
+{{< /mylist >}}
 
 
 
