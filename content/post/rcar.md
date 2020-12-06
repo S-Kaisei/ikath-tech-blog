@@ -18,32 +18,45 @@ Raspbeey Pi に学習させたモデルを搭載して、道路の左車線を�
 
 ## 開発環境
 
-- Raspberry Pi 3B raspbian 9.4
-- Jupyter Notebook 4.4.0
-- Python 3.5.3
-- TensorFlow 1.11.0
-- OpenCV 3.4.4
+・ Raspberry Pi 3B raspbian 9.4
+
+・ Jupyter Notebook 4.4.0
+
+・ Python 3.5.3
+
+・ TensorFlow 1.11.0
+
+・ OpenCV 3.4.4
 
 ## 行ったこと
 
 1. ラジコンの製作
-   - [これ](https://www.amazon.co.jp/gp/product/B014L1CF1K/ref=ppx_yo_dt_b_asin_title_o03_s00?ie=UTF8&psc=1)の組み立て
+
+   ・ [これ](https://www.amazon.co.jp/gp/product/B014L1CF1K/ref=ppx_yo_dt_b_asin_title_o03_s00?ie=UTF8&psc=1)の組み立て
 
 2. Raspberry Piの環境構築
-   - OS のインストール
-   - SSH の設定や IPアドレスの固定、その他必要なフレームワークのインストールなど
+
+   ・ OS のインストール
+
+   ・ SSH の設定や IPアドレスの固定、その他必要なフレームワークのインストールなど
 
 3. 3Dプリンタの使用
-   - 砲台の作成
-   - 砲台やモータドライバを固定するための土台の作成
 
-4. プログラミング(Python)
-   - サーボモータ、DC モータによるラジコンの制御
-   - CNN による画像の分類
-   - Tiny-YOLOv3 を用いた物体検出
+   ・ 砲台の作成   
+
+   ・ 砲台やモータドライバを固定するための土台の作成
+
+4. プログラミング(Python)   
+
+   ・ サーボモータ、DC モータによるラジコンの制御
+
+   ・ CNN による画像の分類
+
+   ・ Tiny-YOLOv3 を用いた物体検出
 
 5. データセットの収集
-   - 前進、右折、左折の3クラスの画像
+
+   ・ 前進、右折、左折の3クラスの画像
 
 6. 画像分類モデルの作成
 

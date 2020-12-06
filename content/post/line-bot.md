@@ -12,8 +12,9 @@ draft: false
 
 ## Requirement
 
-- Line Developer の登録と使いかた
-- Google Account の所持
+・ Line Developer の登録と使いかた
+
+・ Google Account の所持
 
 
 

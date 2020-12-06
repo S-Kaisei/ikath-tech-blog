@@ -8,7 +8,7 @@ draft: false
 
 ## Requirement
 
-- [Hugo × GitHub Pages でブログを公開するまでの手順を紹介](https://s-kaisei.github.io/Ikath-Tech-Blog/post/blog-introduce/) を終えている
+・ [Hugo × GitHub Pages でブログを公開するまでの手順を紹介](https://s-kaisei.github.io/Ikath-Tech-Blog/post/blog-introduce/) を終えている
 
 ​      
 

@@ -11,9 +11,11 @@ draft: false
 
 ## Requirement
 
-- macOS Catalina
-- GitHub Account の所持: [https://github.co.jp/](https://github.co.jp/)
-- Homebrew: [https://brew.sh/index_ja](https://brew.sh/index_ja)
+・ macOS Catalina
+
+・ GitHub Account の所持: [https://github.co.jp/](https://github.co.jp/)
+
+・ Homebrew: [https://brew.sh/index_ja](https://brew.sh/index_ja)
 
 を前提に話を進めていきます。        
 
