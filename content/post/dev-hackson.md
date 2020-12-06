@@ -1,7 +1,7 @@
 ---
 title: "DEV 主催の GitHub Actions Hackathon に参加してきました"
 date: 2020-12-06T03:10:54+09:00
-draft: true
+draft: false
 ---
 
 タイトルにもある通り、DEV が主催した [GitHub Actions hackathon ](https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn)に参加しましたので、備忘録として記事を書きたいと思います。
