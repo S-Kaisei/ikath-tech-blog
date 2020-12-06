@@ -1,4 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ikath Tech Blog</title><link>https://s-kaisei.github.io/Ikath-Tech-Blog/</link><description>Recent content on Ikath Tech Blog</description><generator>Hugo -- gohugo.io</generator><copyright>Copyright © 2019, Weru and the Hugo Authors; all rights reserved.</copyright><lastBuildDate>Sat, 24 Oct 2020 08:08:16 +0900</lastBuildDate><atom:link href="https://s-kaisei.github.io/Ikath-Tech-Blog/index.xml" rel="self" type="application/rss+xml"/><item><title>About Me</title><link>https://s-kaisei.github.io/Ikath-Tech-Blog/about/</link><pubDate>Sat, 24 Oct 2020 10:42:18 +0900</pubDate><guid>https://s-kaisei.github.io/Ikath-Tech-Blog/about/</guid><description>Information Name: Kaisei Shimura
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Ikath Tech Blog</title><link>https://s-kaisei.github.io/Ikath-Tech-Blog/</link><description>Recent content on Ikath Tech Blog</description><generator>Hugo -- gohugo.io</generator><copyright>Copyright © 2019, Weru and the Hugo Authors; all rights reserved.</copyright><lastBuildDate>Sun, 06 Dec 2020 03:10:54 +0900</lastBuildDate><atom:link href="https://s-kaisei.github.io/Ikath-Tech-Blog/index.xml" rel="self" type="application/rss+xml"/><item><title>DEV 主催の GitHub Actions Hackathon に参加してきました</title><link>https://s-kaisei.github.io/Ikath-Tech-Blog/post/dev-hackson/</link><pubDate>Sun, 06 Dec 2020 03:10:54 +0900</pubDate><guid>https://s-kaisei.github.io/Ikath-Tech-Blog/post/dev-hackson/</guid><description>タイトルにもある通り、DEV が主催した GitHub Actions hackathon に参加しましたので、備忘録として記事を書きたいと思います。
+GitHib Actions とは GitHub Actions は GitHub のリポジトリ内でソフトウェア開発ワークフローを自動化することができるサービスです。(ここで、ソフトウェア開発ワークフローは、ビルド・テスト・デプロイなどが該当します。) ワークフローは、プッシュ、Issue、リリースなどの GitHub プラットフォームのイベントをトリガーとして起動することができます。GitHub Actions についてより詳しく知りたい方はこちらをどうぞ。
+　Categories 本ハッカソンには、5つのカテゴリーがあり、それぞれ以下に示します。
+・ Maintainer Must-Haves: 開発者のメンテナンスを楽にします
+・ DIY Deployments: オープンソース・プロジェクトのデプロイメント・プロセスを改善します
+・ Interesting IoT: IoT と連携させます
+・ Phone Friendly: モバイル用に構築されたワークフロー (PWA、iOS/Android)・
+・ Wacky Wildcards: 上記のカテゴリに当てはまらないもの (面白いもの)
+Maintainer Must-Haves にエントリーしました。
+　参加方法 ・ #ActionsHackathon タグを使用して、プロジェクトの進行状況を投稿します。
+・ テンプレートに従ってワークフロー (.yml) やコードリポジトリを共有し、プロジェクトを DEV post に提出します。
+・ 投稿の一部としてリポジトリを共有する場合は、プロジェクトにオープンソースライセンスと README が含むようにします。
+　Workflow 今回作成した GitHub Actions は、関連もしくは類似する issue を提案する actions-suggest-related-links です。</description></item><item><title>About Me</title><link>https://s-kaisei.github.io/Ikath-Tech-Blog/about/</link><pubDate>Sat, 24 Oct 2020 10:42:18 +0900</pubDate><guid>https://s-kaisei.github.io/Ikath-Tech-Blog/about/</guid><description>Information Name: Kaisei Shimura
 Nickname: Ikath
 University: the University of Aizu
 Age: 23

@@ -1,0 +1,73 @@
+<!doctype html><html lang=en><head><title>D e v 主催の git hub actions hackathon に参加してきました | Ikath Tech Blog</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=keywords content="Ikath Tech Blog"><meta property="og:locale" content="en_US"><meta property="og:type" content="article"><meta property="og:title" content="DEV 主催の GitHub Actions Hackathon に参加してきました"><meta property="og:description" content="タイトルにもある通り、DEV が主催した GitHub Actions hackathon に参加しましたので、備忘録として記事を書きたいと思います。
+GitHib Actions とは GitHub Actions は GitHub のリポジトリ内でソフトウェア開発ワークフローを自動化することがで …"><meta property="og:url" content="https://s-kaisei.github.io/Ikath-Tech-Blog/post/dev-hackson/"><meta property="og:image" content="images/%!s()"><link rel=apple-touch-icon sizes=180x180 href=https://s-kaisei.github.io/Ikath-Tech-Blog/images/icons/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=https://s-kaisei.github.io/Ikath-Tech-Blog/images/icons/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=https://s-kaisei.github.io/Ikath-Tech-Blog/images/icons/favicon-16x16.png><link rel=manifest href=https://s-kaisei.github.io/Ikath-Tech-Blog/images/icons/site.webmanifest><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><link rel=canonical href=https://s-kaisei.github.io/Ikath-Tech-Blog/post/dev-hackson/><link rel=stylesheet href=https://s-kaisei.github.io/Ikath-Tech-Blog/css/styles.86c6da248e485cdc7f340baeb04c29cf0499e12a33a387104028f046c1d4ba15aa3ef8a4bf8f44a2fba7f0263053fa54dc4d2f2baa3d6c8ebb3c69f7bdbded2b.css integrity="sha512-hsbaJI5IXNx/NAuusEwpzwSZ4Sozo4cQQCjwRsHUuhWqPvikv49Eovun8CYwU/pU3E0vK6o9bI67PGn3vb3tKw=="></head><body><div class=nav-drop><div class=nav-body><a href=https://s-kaisei.github.io/Ikath-Tech-Blog/about/ class=nav_item>AboutMe</a>
+<a href=https://s-kaisei.github.io/Ikath-Tech-Blog/post/ class=nav_item>Blog</a><div class=nav-close></div><div class=color_mode><label for=mode>Toggle Dark Mode</label>
+<input type=checkbox class=color_choice id=mode></div></div></div><header class=nav><nav class=nav-menu><a href=https://s-kaisei.github.io/Ikath-Tech-Blog/ class="nav-brand nav_item">Ikath Tech Blog</a><div class=nav_bar-wrap><div class=nav_bar></div></div></nav></header><main><div class="wrap mt post"><div><p class=post_date>06. December 2020</p><h1 class=post_title>DEV 主催の GitHub Actions Hackathon に参加してきました</h1><div class=post_body><div class=post_inner><p>タイトルにもある通り、DEV が主催した <a href=https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn>GitHub Actions hackathon </a>に参加しましたので、備忘録として記事を書きたいと思います。</p><h2 id=githib-actions-とは>GitHib Actions とは</h2><p>GitHub Actions は GitHub のリポジトリ内でソフトウェア開発ワークフローを自動化することができるサービスです。(ここで、ソフトウェア開発ワークフローは、ビルド・テスト・デプロイなどが該当します。) ワークフローは、プッシュ、Issue、リリースなどの GitHub プラットフォームのイベントをトリガーとして起動することができます。GitHub Actions についてより詳しく知りたい方は<a href=https://docs.github.com/en/free-pro-team@latest/actions>こちら</a>をどうぞ。</p><p>　　　</p><h2 id=categories>Categories</h2><p>本ハッカソンには、5つのカテゴリーがあり、それぞれ以下に示します。</p><p>・ <strong>Maintainer Must-Haves:</strong> 開発者のメンテナンスを楽にします</p><p>・ <strong>DIY Deployments:</strong> オープンソース・プロジェクトのデプロイメント・プロセスを改善します</p><p>・ <strong>Interesting IoT:</strong> IoT と連携させます</p><p>・ <strong>Phone Friendly:</strong> モバイル用に構築されたワークフロー (PWA、iOS/Android)・</p><p>・ <strong>Wacky Wildcards:</strong> 上記のカテゴリに当てはまらないもの (面白いもの)</p><blockquote><p><strong>Maintainer Must-Haves</strong> にエントリーしました。</p></blockquote><p>　　　</p><h2 id=参加方法>参加方法</h2><p>・ #ActionsHackathon タグを使用して、プロジェクトの進行状況を投稿します。</p><p>・ テンプレートに従ってワークフロー (.yml) やコードリポジトリを共有し、プロジェクトを DEV post に提出します。</p><p>・ 投稿の一部としてリポジトリを共有する場合は、プロジェクトにオープンソースライセンスと README が含むようにします。</p><p>　　　</p><h2 id=workflow>Workflow</h2><p>今回作成した GitHub Actions は、関連もしくは類似する issue を提案する <a href=https://github.com/peaceiris/actions-suggest-related-links>actions-suggest-related-links</a> です。</p><p>ユーザーによっては、open issue や close issue に類似した新しい issue を作成することがあります。そのような issue に遭遇したら、類似した問題を見つけ、それをコメントとして投稿する必要があります。そのプロセスは面倒ですよね？この Action は、あなたの代わりにそれを行うことができます。</p><picture class=nav_logo>
+<source srcset=https://s-kaisei.github.io/Ikath-Tech-Blog/images/eg_suggest_related_link.png media="(prefers-color-scheme: dark)"><img srcset=https://s-kaisei.github.io/Ikath-Tech-Blog/images/eg_suggest_related_link.png alt=eg_suggest_related_link></picture><p>e.g. <code>.github/workflows/suggest-related-links.yml</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>name: &#39;Suggest Related Links&#39;
+
+on:
+  issues:
+    types:
+      - opened
+      - edited
+  workflow_dispatch:
+  schedule:
+    - cron: &#39;13 13 * * */7&#39;
+
+jobs:
+  action:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/actions-suggest-related-links-tmp
+          key: ${{ runner.os }}-action-${{ hashFiles(&#39;~/actions-suggest-related-links-tmp/training-data.json&#39;) }}
+          restore-keys: |
+            ${{ runner.os }}-action-
+
+      - uses: peaceiris/actions-suggest-related-links@v1.1.1
+      - uses: peaceiris/actions-suggest-related-links/models/fasttext@v1.1.1
+        if: github.event_name == &#39;issues&#39;
+        with:
+          version: v1.1.1
+      - uses: peaceiris/actions-suggest-related-links@v1.1.1
+        with:
+          mode: &#39;suggest&#39;
+          repository: &#39;peaceiris/actions-gh-pages&#39;
+          unclickable: true
+</code></pre></td></tr></table></div></div><p>​</p><h2 id=workflow-overview>Workflow Overview</h2><p>このアクションは、主にデータ収集、前処理、モデルの学習、類似する issue の検索、リンクの推奨の5つの部分で構成されています。</p><picture class=nav_logo>
+<source srcset=https://s-kaisei.github.io/Ikath-Tech-Blog/images/workflow.jpg media="(prefers-color-scheme: dark)"><img srcset=https://s-kaisei.github.io/Ikath-Tech-Blog/images/workflow.jpg alt=workflow></picture><p>​</p><h2 id=data-collection>Data Collection</h2><p>リポジトリのすべての issue は GitHub API で収集されます。issue にはタイトル、本文、コメントが含まれます。トレーニングデータはスケジューリング機能を用いて定期的に収集され、アーティファクトとして出力され、 キャッシュとして保存されます。</p><p>​</p><h2 id=preprocessing>Preprocessing</h2><p>Markdownフォーマットは、統合されたプレーンテキストに変換されます。このとき、アルファベット以外の記号は削除されます。</p><p>・<a href=https://github.com/peaceiris/actions-suggest-related-links/blob/main/actions/src/preprocess.ts>https://github.com/peaceiris/actions-suggest-related-links/blob/main/actions/src/preprocess.ts</a></p><p>　　　</p><h2 id=train-model>Train Model</h2><p>新しい issue が作成または更新されると、fastText モデルが学習されます。fastText は、その名前の通り、推論時間が非常に短いという利点があります。GitHub Actions を実行する際のトレーニング時間は問題にならないと考えています。GitHub Pages リポジトリの GitHub Actions の場合、トレーニング実行時間は1秒でした。</p><p>​</p><h2 id=find-similar-issues>Find Similar Issues</h2><p>fastText では、トレーニングデータの単語ベクトルと投稿データの単語ベクトルを計算します。コサイン類似度は、トレーニング・データのどのワード・ベクトルが投稿されたデータのワード・ベクトルに近いかを決定するために使用されます。コサイン類似度が高いほど、文はより類似しています。</p><p>　　　</p><h2 id=suggest-issues>Suggest Issues</h2><p>作成された issue の本文に類似するいくつかの関連リンクが、このアクションによって一覧表示されます。</p><picture class=nav_logo>
+<source srcset=https://s-kaisei.github.io/Ikath-Tech-Blog/images/eg_suggest_related_link.png media="(prefers-color-scheme: dark)"><img srcset=https://s-kaisei.github.io/Ikath-Tech-Blog/images/eg_suggest_related_link.png alt=eg_suggest_related_link></picture><p><a href=https://github.com/peaceiris/actions-suggest-related-links/issues/2>https://github.com/peaceiris/actions-suggest-related-links/issues/2</a></p><p>​</p><h2 id=まとめ>まとめ</h2><p>投稿された issue に対して、すでに投稿された issue と類似する issue を探して提案する <a href=https://github.com/peaceiris/actions-suggest-related-links>actions-suggest-related-links</a> を作成しました。GitHub API を介して取得された issue は、fastText によってモデルを生成し、コサイン類似度を求めて関連性の高い issue をリストするといった内容でした。</p><p>所々、苦労した場面はありましたが、最後には形になって投稿できたことが良かったです。記事は以上となります。お疲れ様でした。</p></div><div class="post_extra mb-2"><div class=copy data-before="Share Story" data-after="Link Copied"><svg class="icon"><use xlink:href="#copy"/></svg></div></div><div></div></div></div><a href=https://s-kaisei.github.io/Ikath-Tech-Blog/ class=post_nav><span class=post_next>The Latest<svg class="icon icon_scale"><use xlink:href="#double-arrow"/></svg></span></a></div></main><footer class="footer wrap pale"><p>&copy;&nbsp;<span class=year></span>&nbsp;Ikath Tech Blog</p><p class="attribution upcase">Designed by <a href="<no value>" target=_blank title="Linkedin Profile" rel=nonopener><no value></a></p></footer><script src=https://s-kaisei.github.io/Ikath-Tech-Blog/js/index.min.1a678c05b3d77bbd645a832d2c854f0e0728782ee0b9cc73940636c782bb1ec995125d2538c99ba876614f4e649bf837b9f43ff6bbd68a8d48a2a720e2dd3656.js></script><svg width="0" height="0" class="hidden"><symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 699.428 699.428" id="copy"><path d="M502.714.0H240.428C194.178.0 153 42.425 153 87.429l-25.267.59c-46.228.0-84.019 41.834-84.019 86.838V612c0 45.004 41.179 87.428 87.429 87.428H459c46.249.0 87.428-42.424 87.428-87.428h21.857c46.25.0 87.429-42.424 87.429-87.428v-349.19L502.714.0zM459 655.715H131.143c-22.95.0-43.714-21.441-43.714-43.715V174.857c0-22.272 18.688-42.993 41.638-42.993l23.933-.721v393.429C153 569.576 194.178 612 240.428 612h262.286c0 22.273-20.765 43.715-43.714 43.715zm153-131.143c0 22.271-20.765 43.713-43.715 43.713H240.428c-22.95.0-43.714-21.441-43.714-43.713V87.429c0-22.272 20.764-43.714 43.714-43.714H459c-.351 50.337.0 87.975.0 87.975.0 45.419 40.872 86.882 87.428 86.882H612v306zm-65.572-349.715c-23.277.0-43.714-42.293-43.714-64.981V44.348L612 174.857h-65.572zm-43.714 131.537H306c-12.065.0-21.857 9.77-21.857 21.835s9.792 21.835 21.857 21.835h196.714c12.065.0 21.857-9.771 21.857-21.835.0-12.065-9.792-21.835-21.857-21.835zm0 109.176H306c-12.065.0-21.857 9.77-21.857 21.834.0 12.066 9.792 21.836 21.857 21.836h196.714c12.065.0 21.857-9.77 21.857-21.836.0-12.064-9.792-21.834-21.857-21.834z"/></symbol><symbol viewBox="0 0 53 42" xmlns="http://www.w3.org/2000/svg" id="double-arrow"><path d="M.595 39.653a1.318 1.318.0 010-1.864L16.55 21.833a1.318 1.318.0 000-1.863L.595 4.014a1.318 1.318.0 010-1.863L2.125.62a1.318 1.318.0 011.864.0l19.35 19.349a1.318 1.318.0 010 1.863l-19.35 19.35a1.318 1.318.0 01-1.863.0zm29 0a1.318 1.318.0 010-1.864L45.55 21.833a1.318 1.318.0 000-1.863L29.595 4.014a1.318 1.318.0 010-1.863l1.53-1.53a1.318 1.318.0 011.864.0l19.35 19.349a1.318 1.318.0 010 1.863l-19.35 19.35a1.318 1.318.0 01-1.863.0z"/></symbol></svg></body></html>
