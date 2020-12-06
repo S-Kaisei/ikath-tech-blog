@@ -1,7 +1,7 @@
 ---
 title: "solafune コンペ#1に参加しました"
 date: 2020-12-06T11:01:54+09:00
-draft: true
+draft: false
 ---
 
 cf. @solafune (https://solafune.com) 
