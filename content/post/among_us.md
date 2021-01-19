@@ -6,7 +6,7 @@ draft: false
 
 最近、大学のメンバーで [among us](https://ja.wikipedia.org/wiki/Among_Us) というゲームをするのにハマっております。among us とはいわゆる人狼ゲームであり、クルーとインポスターという二つの役職に分かれて生存を目指すゲームです。 詳しい説明は省略しますが、議論はマップを見ながら行うことが一般的であるため、ゲームを進めるにあたってマップは必須なアイテムです。ただ、ライングループで議論を行う場合、マップを探すのが面倒だったりするので bot を作って楽しようと考えました。今回は、その bot を紹介します。
 
-![amoug_us_demo.png](https://s-kaisei.github.io/Ikath-Tech-Blog/images/amoug_us_demo.png)
+<img src="https://s-kaisei.github.io/Ikath-Tech-Blog/images/amoug_us_demo.png" alt="https://s-kaisei.github.io/Ikath-Tech-Blog/images/amoug_us_demo.png" style="zoom:50%;" />
 
 
 
@@ -52,7 +52,7 @@ function reply_message(e) {
           "type": "carousel",
           "columns": [
             {
-              "thumbnailImageUrl": "https://1.bp.blogspot.com/-uxIsaN0S5lQ/X-FcrvAAInI/AAAAAAABdD4/6uw_qNUh9dQrG0aUzIExybt84yTEmXOPwCNcBGAsYHQ/s200/onepiece01_luffy.png",
+              "thumbnailImageUrl": "https://s-kaisei.github.io/Ikath-Tech-Blog/images/the_skeld.jpg",
               "imageBackgroundColor": "#000000",
               "title": "THE SKELD",
               "text": "First Map. The large spaceship.",
@@ -66,7 +66,7 @@ function reply_message(e) {
             },
             
             {
-              "thumbnailImageUrl": "https://1.bp.blogspot.com/-rzRcgoXDqEg/YAOTCKoCpPI/AAAAAAABdOI/5Bl3_zhOxm07TUGzW8_83cXMOT9yy1VJwCNcBGAsYHQ/s200/onepiece02_zoro_bandana.png",
+              "thumbnailImageUrl": "https://s-kaisei.github.io/Ikath-Tech-Blog/images/mira_hq.jpg",
               "imageBackgroundColor": "#000000",
               "title": "MILA＿HQ",
               "text": "Second Map. A high-rise building.",
@@ -79,7 +79,7 @@ function reply_message(e) {
               ]
             },
             {
-              "thumbnailImageUrl": "https://1.bp.blogspot.com/-VACf4WfKNOk/X-Fcx7DWraI/AAAAAAABdE8/KT0UudaIHrMtbFvjC02yLuPLNBZurGYpQCNcBGAsYHQ/s200/onepiece17_doflamingo.png",
+              "thumbnailImageUrl": "https://s-kaisei.github.io/Ikath-Tech-Blog/images/polus.jpg",
               "imageBackgroundColor": "#000000",
               "title": "POLUS",
               "text": "Third Map. A big station on a chilly planet.",
@@ -105,11 +105,11 @@ function post_back(e) {
   var data = e.postback.data;
   
   if (data == "first") {
-    var imageUrl = "https://drive.google.com/uc?id=1HNhxL5Gww_hdQJs33I43vCkOX4FZeDiP";
+    var imageUrl = "https://s-kaisei.github.io/Ikath-Tech-Blog/images/the_skeld.jpg";
   } else if (data == "second") {
-    var imageUrl = "https://drive.google.com/uc?id=1tQGpWYGFwSyzplID284c661FC2phJhXF";
+    var imageUrl = "https://s-kaisei.github.io/Ikath-Tech-Blog/images/mira_hq.jpg";
   } else if (data == "third") {
-    var imageUrl = "https://drive.google.com/uc?id=10uggVpylGheCcifYZSAaBFVY-UflbvcH";
+    var imageUrl = "https://s-kaisei.github.io/Ikath-Tech-Blog/images/polus.jpg";
   }
 
   var postData = {
@@ -135,6 +135,8 @@ function fetch_data(postData) {
   UrlFetchApp.fetch("https://api.line.me/v2/bot/message/reply", options);
 }
 ```
+
+​                        
 
 ## MAPs
 
