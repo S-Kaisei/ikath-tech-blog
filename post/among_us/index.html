@@ -1,6 +1,6 @@
 <!doctype html><html lang=en><head><title>Among us のマップを送信してくれる bot を作成したので紹介 | Ikath Tech Blog</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=keywords content="Ikath Tech Blog"><meta property="og:locale" content="en_US"><meta property="og:type" content="article"><meta property="og:title" content="Among us のマップを送信してくれる bot を作成したので紹介"><meta property="og:description" content="最近、大学のメンバーで among us というゲームをするのにハマっております。among us とはいわゆる人狼ゲームであり、クルーとインポスターという二つの役職に分かれて生存を目指すゲームです。 詳しい説明は省略しますが、議論はマップを見ながら行うことが一般的であるため、ゲームを進めるにあたっ …"><meta property="og:url" content="https://s-kaisei.github.io/Ikath-Tech-Blog/post/among_us/"><meta property="og:image" content="images/%!s()"><link rel=apple-touch-icon sizes=180x180 href=https://s-kaisei.github.io/Ikath-Tech-Blog/images/icons/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=https://s-kaisei.github.io/Ikath-Tech-Blog/images/icons/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=https://s-kaisei.github.io/Ikath-Tech-Blog/images/icons/favicon-16x16.png><link rel=manifest href=https://s-kaisei.github.io/Ikath-Tech-Blog/images/icons/site.webmanifest><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><link rel=canonical href=https://s-kaisei.github.io/Ikath-Tech-Blog/post/among_us/><link rel=stylesheet href=https://s-kaisei.github.io/Ikath-Tech-Blog/css/styles.86c6da248e485cdc7f340baeb04c29cf0499e12a33a387104028f046c1d4ba15aa3ef8a4bf8f44a2fba7f0263053fa54dc4d2f2baa3d6c8ebb3c69f7bdbded2b.css integrity="sha512-hsbaJI5IXNx/NAuusEwpzwSZ4Sozo4cQQCjwRsHUuhWqPvikv49Eovun8CYwU/pU3E0vK6o9bI67PGn3vb3tKw=="></head><body><div class=nav-drop><div class=nav-body><a href=https://s-kaisei.github.io/Ikath-Tech-Blog/about/ class=nav_item>AboutMe</a>
 <a href=https://s-kaisei.github.io/Ikath-Tech-Blog/post/ class=nav_item>Blog</a><div class=nav-close></div><div class=color_mode><label for=mode>Toggle Dark Mode</label>
-<input type=checkbox class=color_choice id=mode></div></div></div><header class=nav><nav class=nav-menu><a href=https://s-kaisei.github.io/Ikath-Tech-Blog/ class="nav-brand nav_item">Ikath Tech Blog</a><div class=nav_bar-wrap><div class=nav_bar></div></div></nav></header><main><div class="wrap mt post"><div><p class=post_date>20. January 2021</p><h1 class=post_title>Among us のマップを送信してくれる bot を作成したので紹介</h1><div class=post_body><div class=post_inner><p>最近、大学のメンバーで <a href=https://ja.wikipedia.org/wiki/Among_Us>among us</a> というゲームをするのにハマっております。among us とはいわゆる人狼ゲームであり、クルーとインポスターという二つの役職に分かれて生存を目指すゲームです。 詳しい説明は省略しますが、議論はマップを見ながら行うことが一般的であるため、ゲームを進めるにあたってマップは必須なアイテムです。ただ、ライングループで議論を行う場合、マップを探すのが面倒だったりするので bot を作って楽しようと考えました。今回は、その bot を紹介します。</p><p><img src=https://s-kaisei.github.io/Ikath-Tech-Blog/images/amoug_us_demo.png alt=amoug_us_demo.png></p><h2 id=requirement>Requirement</h2><p>・ Line Developer の登録と使いかた</p><p>・ Google Account の所持</p><p>・ Google App Scripts の使い方</p><p>　　　</p><h2 id=ソースコード>ソースコード</h2><p>参考: <a href=https://www.pre-practice.net/2017/10/line-bot_82.html>https://www.pre-practice.net/2017/10/line-bot_82.html</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>  1
+<input type=checkbox class=color_choice id=mode></div></div></div><header class=nav><nav class=nav-menu><a href=https://s-kaisei.github.io/Ikath-Tech-Blog/ class="nav-brand nav_item">Ikath Tech Blog</a><div class=nav_bar-wrap><div class=nav_bar></div></div></nav></header><main><div class="wrap mt post"><div><p class=post_date>20. January 2021</p><h1 class=post_title>Among us のマップを送信してくれる bot を作成したので紹介</h1><div class=post_body><div class=post_inner><p>最近、大学のメンバーで <a href=https://ja.wikipedia.org/wiki/Among_Us>among us</a> というゲームをするのにハマっております。among us とはいわゆる人狼ゲームであり、クルーとインポスターという二つの役職に分かれて生存を目指すゲームです。 詳しい説明は省略しますが、議論はマップを見ながら行うことが一般的であるため、ゲームを進めるにあたってマップは必須なアイテムです。ただ、ライングループで議論を行う場合、マップを探すのが面倒だったりするので bot を作って楽しようと考えました。今回は、その bot を紹介します。</p><p></p><h2 id=requirement>Requirement</h2><p>・ Line Developer の登録と使いかた</p><p>・ Google Account の所持</p><p>・ Google App Scripts の使い方</p><p>　　　</p><h2 id=ソースコード>ソースコード</h2><p>参考: <a href=https://www.pre-practice.net/2017/10/line-bot_82.html>https://www.pre-practice.net/2017/10/line-bot_82.html</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>  1
 </span><span class=lnt>  2
 </span><span class=lnt>  3
 </span><span class=lnt>  4
@@ -136,7 +136,7 @@ function reply_message(e) {
           &#34;type&#34;: &#34;carousel&#34;,
           &#34;columns&#34;: [
             {
-              &#34;thumbnailImageUrl&#34;: &#34;https://1.bp.blogspot.com/-uxIsaN0S5lQ/X-FcrvAAInI/AAAAAAABdD4/6uw_qNUh9dQrG0aUzIExybt84yTEmXOPwCNcBGAsYHQ/s200/onepiece01_luffy.png&#34;,
+              &#34;thumbnailImageUrl&#34;: &#34;https://s-kaisei.github.io/Ikath-Tech-Blog/images/the_skeld.jpg&#34;,
               &#34;imageBackgroundColor&#34;: &#34;#000000&#34;,
               &#34;title&#34;: &#34;THE SKELD&#34;,
               &#34;text&#34;: &#34;First Map. The large spaceship.&#34;,
@@ -150,7 +150,7 @@ function reply_message(e) {
             },
             
             {
-              &#34;thumbnailImageUrl&#34;: &#34;https://1.bp.blogspot.com/-rzRcgoXDqEg/YAOTCKoCpPI/AAAAAAABdOI/5Bl3_zhOxm07TUGzW8_83cXMOT9yy1VJwCNcBGAsYHQ/s200/onepiece02_zoro_bandana.png&#34;,
+              &#34;thumbnailImageUrl&#34;: &#34;https://s-kaisei.github.io/Ikath-Tech-Blog/images/mira_hq.jpg&#34;,
               &#34;imageBackgroundColor&#34;: &#34;#000000&#34;,
               &#34;title&#34;: &#34;MILA＿HQ&#34;,
               &#34;text&#34;: &#34;Second Map. A high-rise building.&#34;,
@@ -163,7 +163,7 @@ function reply_message(e) {
               ]
             },
             {
-              &#34;thumbnailImageUrl&#34;: &#34;https://1.bp.blogspot.com/-VACf4WfKNOk/X-Fcx7DWraI/AAAAAAABdE8/KT0UudaIHrMtbFvjC02yLuPLNBZurGYpQCNcBGAsYHQ/s200/onepiece17_doflamingo.png&#34;,
+              &#34;thumbnailImageUrl&#34;: &#34;https://s-kaisei.github.io/Ikath-Tech-Blog/images/polus.jpg&#34;,
               &#34;imageBackgroundColor&#34;: &#34;#000000&#34;,
               &#34;title&#34;: &#34;POLUS&#34;,
               &#34;text&#34;: &#34;Third Map. A big station on a chilly planet.&#34;,
@@ -189,11 +189,11 @@ function post_back(e) {
   var data = e.postback.data;
   
   if (data == &#34;first&#34;) {
-    var imageUrl = &#34;https://drive.google.com/uc?id=1HNhxL5Gww_hdQJs33I43vCkOX4FZeDiP&#34;;
+    var imageUrl = &#34;https://s-kaisei.github.io/Ikath-Tech-Blog/images/the_skeld.jpg&#34;;
   } else if (data == &#34;second&#34;) {
-    var imageUrl = &#34;https://drive.google.com/uc?id=1tQGpWYGFwSyzplID284c661FC2phJhXF&#34;;
+    var imageUrl = &#34;https://s-kaisei.github.io/Ikath-Tech-Blog/images/mira_hq.jpg&#34;;
   } else if (data == &#34;third&#34;) {
-    var imageUrl = &#34;https://drive.google.com/uc?id=10uggVpylGheCcifYZSAaBFVY-UflbvcH&#34;;
+    var imageUrl = &#34;https://s-kaisei.github.io/Ikath-Tech-Blog/images/polus.jpg&#34;;
   }
 
   var postData = {
@@ -218,7 +218,7 @@ function fetch_data(postData) {
   };
   UrlFetchApp.fetch(&#34;https://api.line.me/v2/bot/message/reply&#34;, options);
 }
-</code></pre></td></tr></table></div></div><h2 id=maps>MAPs</h2><p>参照: <a href=https://among-us.fandom.com/ja/wiki/%E3%83%9E%E3%83%83%E3%83%97%E3%82%AC%E3%82%A4%E3%83%89>https://among-us.fandom.com/ja/wiki/%E3%83%9E%E3%83%83%E3%83%97%E3%82%AC%E3%82%A4%E3%83%89</a></p><picture class=nav_logo>
+</code></pre></td></tr></table></div></div><p>​</p><h2 id=maps>MAPs</h2><p>参照: <a href=https://among-us.fandom.com/ja/wiki/%E3%83%9E%E3%83%83%E3%83%97%E3%82%AC%E3%82%A4%E3%83%89>https://among-us.fandom.com/ja/wiki/%E3%83%9E%E3%83%83%E3%83%97%E3%82%AC%E3%82%A4%E3%83%89</a></p><picture class=nav_logo>
 <source srcset=https://s-kaisei.github.io/Ikath-Tech-Blog/images/the_skeld.jpg media="(prefers-color-scheme: dark)"><img srcset=https://s-kaisei.github.io/Ikath-Tech-Blog/images/the_skeld.jpg alt="the skeld"></picture>
 <picture class=nav_logo>
 <source srcset=https://s-kaisei.github.io/Ikath-Tech-Blog/images/mira_hq.jpg media="(prefers-color-scheme: dark)"><img srcset=https://s-kaisei.github.io/Ikath-Tech-Blog/images/mira_hq.jpg alt="mira hq"></picture>
